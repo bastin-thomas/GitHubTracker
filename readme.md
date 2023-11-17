@@ -1,43 +1,80 @@
-# Documentation
+# GitHub Tracker
+> Examen Flutter 2022-2023
+This Tracker is of course a way to track your activity on GitHub, and also activity of wanted user.
+You can also track a specific repository to have all news about it.
 
-> Vous vous adressez potentiellement à un futur employeur et donc une personne qui n'aura pas nécessairement l'occasion de compiler votre projet. Votre `readme.md` contiendra donc au moins :
+## 🗂️|Répartition des Dossiers du Repository
+- **Documentation** : Rassemble toutes les informations relatives a la documentation utilisé pour le projet (consigne, lien vers d'autres documentations...).
+- **Mockup**: Rassemble tout ce qui est en rapport avec les différentes maquettes de l'applications.
+- **Source**: Je vous laisse devinez...
 
+## 📜|Description de l'Application
+N'avez vous jamais été curieux d'en connaître un peux plus sur votre activité github ? Ou celle d'un Repository ? voir même d'un autre utilisateur ? Le tout depuis votre smartphone, sur un feed communs ? Si c'est votre cas, alors cette application est faite pour vous.
 
+**Premièrement**, l'application aura comme fonctionnalité le fait de **traqué** toute l'**activité** de votre profil **Github** dans un seul **feed**, Ce dernier traquera vos *commits*, *Merges*, *issues*, *pull request*... fait sur tout les repository que vous utilisé (Votre ou non). Il permettra également de traqué l'**activité** d'une **liste** de **repository publics** dont vous souhaitez gardé la trace. Une dernière fonctionnalité permettra de **traqué** toute l'**activité publique** d'un ou plusieurs **utilisateur** que vous sélectionnerer.
 
-## 📁 Présentation des Principaux Dossiers
+Le feed une fois remplis pourra être **filtré** à votre souhait. En effet vous pourrez choisir de n'afficher que les "commits", les "Code Review", les "issues", les "pull request", Une autre option lui permettra de choisir quel utilisateur (sois même ou un dans la liste des tracks), ainsi qu'un Repository (un créer par nous mêmes, ou un dans la liste des tracks) traqué.
 
-Une présentation des principaux dossiers de votre dépôt. Quelles sont les différentes ressources qu'il contient à la racine ? Par exemple, les maquettes, vos inspirations, etc. Si vous avez fait des efforts quant à l'organisation de vos fichiers dans le dossier `lib`, expliquez-les ici.
-
-
-
-## 🚀 Présentation de l'Application
-
-> Une présentation de votre application. Ce dernier répond à un besoin, présentez-le. Ne faites aucune hypothèse sur le niveau de connaissances de votre lecteur. Vous vous adressez ici à un internaute quelconque qui découvre votre dépôt. Évitez un jargon technique dans cette partie de votre présentation.
-
-## 🌐 Étude de l'Existant
-
-> Une brève étude de l'existant. L'idée étant de savoir si d'autres ont déjà couvert le besoin auquel vous essayez de répondre. Ce qui est demandé ici, au-delà d'une brève description, ce sont les points forts et les points faibles de ces différentes applications. Il peut être intéressant de faire un tableau pour mettre en regard les avantages et les inconvénients. Enfin, mettez des captures d'écran des applications afin que l'on comprenne mieux de quoi on parle.
-
-## 🎯 Public Cible
-
-> Parlez de votre public cible. À qui s'adresse votre application et surtout comment prenez-vous en compte ce public-là ?
-
-## 📋 Fonctionnalités
-
-> Une présentation des différentes fonctionnalités de votre application au travers de récits utilisateurs (user story). Soit une description courte et simple d’un besoin ou d’une attente exprimée par un utilisateur. Chacun de ces récits suit la syntaxe "En tant que <qui>, je veux <quoi> afin de <pourquoi>":
-
-> Le `qui` indique le rôle/statut de l’utilisateur à ce moment-là. Par exemple "membre premium" ou "utilisateur non identifié". Pour mieux illustrer la diversité des besoins, on peut également utiliser le concept de persona, c'est-à-dire une personne fictive et représentative à laquelle on peut s'identifier pour mieux comprendre ses attentes. L'identification et la description des personas se fait alors avant de commencer l'écriture des récits utilisateurs. Par exemple, "Odile est une enseignante qui utilise pour la première fois le système".
-
-> Le `quoi` décrit succinctement la fonctionnalité ou le comportement attendu. Le but du récit n'est pas d'en fournir une explication exhaustive.
-
-> Le `pourquoi` permet d'identifier l'intérêt de la fonctionnalité et d'en justifier le développement. Il permet également de mieux évaluer la priorité des fonctionnalités. Pour chacune de ces fonctionnalités, présentées par un récit utilisateur, vous présenterez les maquettes qui s'y rapportent.
-
-## 📈 État d'Avancement
-
->  Un état d'avancement pour chaque fonctionnalité de votre application. Ceci doit évidemment être mis à jour régulièrement. Dès lors que vous aurez terminé de programmer une fonctionnalité, ajoutez dans le document `readme.md` un `.gif` qui l'illustre. Vous pouvez vous servir de [GIF Brewery](https://apps.apple.com/us/app/gif-brewery-3-by-gfycat/id1081413713?mt=12) (Si vous êtes sous macOS) ou de [Gyazo](https://gyazo.com) (Si vous êtes sous Windows).
+Une **Liste noire** permettra de mettre en **"sourdine"** vos **repository** que vous ne voulez plus traqué.
+Par défaut lors de la première connexion sur l'application, les repository "Starred" seront ajouter a la liste des repository traqué. De même pour les utilisateurs que vous suivez.
 
 
 
-## ⚙️ Compilation de l'Application
+## 📱|Application Existante
+Bien entendus GitHub lui même propose déjà quelques choses de similaire sur sa propre Mainpage. Cependant il n'y a quasiment aucun moyen de filtré se feed pour retrouver des informations. De plus il ne ce concentre que sur certains repository, les votres, les starred, les "watched" ou les personnes que vous suivez. Mais peut être que vous ne voulez pas nécessairement être vus par les personnes que vous traqué, dans notre cas cela permet de rester relativement anonyme a ce niveau.
 
-> Enfin, nous vous demandons d'ajouter une section pour les dev où vous expliquez ce qu'il faut faire pour pouvoir compiler l'application. Cette documentation doit être simple et surtout efficace.
+![Image montrant le feed de Github](https://raw.githubusercontent.com/bastin-thomas/GitHubTracker/main/MockUp/FeedsImage.png?token=GHSAT0AAAAAACHX2GCVGMCEEHKG7IR327BKZKWPBQQ)
+
+L'autre triste nouvelle est que l'application Github officiel ne permet pas de traqué des activités sur un seul feed principal. Il existe une fonctionnalité "Explore" Censé vous présenter de nouveau repository, mais nous sommes loin d'un équivalent a notre application.
+
+
+
+## ✨|Fonctionnalitée:
+- *En tant qu'utilisateur* *je veux* pouvoir me connecter en utilisant la connexion GitHub *afin d'utiliser* l'application et si c'est la première fois, importer mes starred repository ainsi que mes abonnements a d'autres utilisateurs.
+
+- *En tant qu'utilisateur* je peux décider de resynchroniser mes track en fonction des starred repo et abonnements dans les paramètres (Suppression des choix customs fait sur l'application). 
+
+- *En tant qu'utilisateur* je peux ajouté ou supprimer des repository externe dans une liste afin de les traqués dans mon feed ou non.
+- *En tant qu'utilisateur* je peux ajouté ou supprimer d'autres membres de GitHub dans une liste afin de les traqués dans mon feed ou non.
+
+- *En tant qu'utilisateur* je peux sélectionner un ou plusieurs utilisateurs (dont moi même) afin de filtré temporairement mon feed en ne voyant que ceux souhaités.
+- *En tant qu'utilisateur* je peux sélectionner un ou plusieurs Repository (dont les miens) afin de filtré temporairement mon feed en ne voyant que ceux souhaités.
+- *En tant qu'utilisateur* je peux sélectionner un ou plusieurs Type de message du feed (pull request, issues,  starred, commits...) afin de filtré temporairement mon feed en ne voyant que ceux souhaités.
+
+- *En tant qu'utilisateur* je peux sélectionner un thème claire ou un thème foncé afin d'ajusté au mieux mes envies du moment.
+- *En tant qu'utilisateur* je peux navigué jusqu'a une page d'information donnant plus de contexte a la création de l'application.
+
+## 💻|Mockup:
+![Image montrant les mockups.](https://media.discordapp.net/attachments/431911532675465241/1052160423023095828/ToUpload.png)
+
+## ♻️|Etat d'Avancement
+
+✅ Création du ReadMe
+
+✅ Création de l'arborescence du Repository
+
+✅ Conception du Mockup / Maquette
+
+✅ Creation UI Page Login
+
+✅ Creation Logique Page Login
+
+✅ Creation Menu Navigation
+
+✅ Creation des routes Flutters
+
+☐ Creation de la page Principal (Feed)
+
+✅ Creation des Widgets représentant les différents Messages du Feed
+
+☐ Creation de la page d'option
+
+☐ Ajout de la liste des personnes a traqué
+
+☐ Ajout de la liste des repository a traqué
+
+☐ Ajout de la liste noire des repository personnels a ne pas traqué
+
+☐ Creation de la logique de Filtre du Feed
+
+☐ Creation de la page "Information"
