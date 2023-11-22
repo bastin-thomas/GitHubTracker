@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:git_hub_tracker/Routes/routes.dart';
 import 'package:git_hub_tracker/cards/Contents/Content_DefaultTEXT.dart';
 import 'package:git_hub_tracker/cards/FeedCard.dart';
 import 'package:git_hub_tracker/partials/Avatar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:git_hub_tracker/partials/Avatar_Websource.dart';
 import 'package:git_hub_tracker/partials/Drawer/TrackedRepository.dart';
-import 'package:git_hub_tracker/styles/constants.dart';
 import '../partials/Drawer/LogoutButton.dart';
 import '../partials/Drawer/ReSyncButton.dart';
-import '../partials/Drawer/TrackedRepository.dart';
 import '../partials/Drawer/TrackedUsers.dart';
 
 
@@ -23,7 +19,7 @@ class FeedPage extends StatefulWidget {
 
 class _FeedPageState extends State<FeedPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = new GlobalKey<RefreshIndicatorState>();
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = GlobalKey<RefreshIndicatorState>();
 
   //User user = FirebaseAuth.instance.currentUser!;
 

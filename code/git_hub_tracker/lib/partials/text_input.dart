@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:git_hub_tracker/styles/constants.dart';
 
 
 class TextInput extends StatelessWidget {

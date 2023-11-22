@@ -4,7 +4,6 @@ import 'package:git_hub_tracker/styles/constants.dart';
 import 'package:git_hub_tracker/partials/UserTag/MyUserTag.dart';
 import 'package:intl/intl.dart';
 
-import 'Contents/Content_DefaultTEXT.dart';
 
 class FeedCard extends StatelessWidget {
   final DateTime publishDate;

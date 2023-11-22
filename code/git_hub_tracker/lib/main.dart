@@ -1,17 +1,9 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:git_hub_tracker/Routes/router.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:git_hub_tracker/screens/FeedPage.dart';
 import 'package:git_hub_tracker/screens/LoginPage.dart';
-import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-
   runApp(const MyApp());
 }
 
@@ -61,16 +53,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
-// class AuthWrapper extends StatelessWidget {
-//   const AuthWrapper({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     if (FirebaseAuth.instance.currentUser?.uid != null) {
-//       return const FeedPage();
-//     }
-//     return LoginPage();
-//   }
-// }

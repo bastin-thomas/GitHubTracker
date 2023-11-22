@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:git_hub_tracker/cards/Contents/Content_Card.dart';
 import 'package:git_hub_tracker/styles/constants.dart';
-import 'package:git_hub_tracker/partials/Avatar.dart';
 
 class Content_DefaultTEXT extends Content_Card {
   const Content_DefaultTEXT({Key? key}) : super(key: key);
