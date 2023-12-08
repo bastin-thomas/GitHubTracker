@@ -33,12 +33,4 @@ List<BoxShadow> kBoxShadowItem = [
   )
 ];
 
-const String kGitHubToken = "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";
 const appScheme = 'flutterdemo';
-
-const Auth0_Domain = 'dev-dywnisq364dw45je.eu.auth0.com';
-const Auth0_ClientId = 'lx9LYRJVLecqhSzuuVMCg3cmNoRLMmLq';
-const Auth0_ClientSecret = 'iOIg4rbjOOxpwRPLj1tzhi9G3yvYAfAed2gqHXinjs0jxGz9IMBG7S6Qm6vYDPYP';
-
-const String GitApp_ClientSecret = '5b87d7aa6baef0a3ef55db0e30fdd06a36133a0c';
-const String GitApp_ClientId = 'f1b94682cbc0e1191117';
