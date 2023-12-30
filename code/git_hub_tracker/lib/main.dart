@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:git_hub_tracker/Routes/router.dart';
-import 'package:git_hub_tracker/screens/LoginPage.dart';
+import 'package:git_hub_tracker/authentication/view/login_page.dart';
+import 'core/logic/routing/router.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: LoginPage(),
+      home: const LoginPage(),
       routes: router,
       title: 'GitHub Tracker',
       debugShowCheckedModeBanner: false,
