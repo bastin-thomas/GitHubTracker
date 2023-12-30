@@ -45,3 +45,5 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+code/git_hub_tracker/lib/core/constants/secret_consts.dart
+code/git_hub_tracker/lib/core/constants/secret_consts.dart
