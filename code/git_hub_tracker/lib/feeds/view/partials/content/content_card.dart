@@ -7,8 +7,9 @@ class ContentCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(10, 7, 10, 7),
+      padding: const EdgeInsets.fromLTRB(5, 7, 5, 7),
       margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+      width: double.infinity,
       decoration: BoxDecoration(
         boxShadow: cBoxShadowItem,
         color: Colors.white10,

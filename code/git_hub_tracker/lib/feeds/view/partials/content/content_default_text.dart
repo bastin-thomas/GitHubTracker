@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:git_hub_tracker/core/view/partials/content_card.dart';
+import 'package:git_hub_tracker/feeds/view/partials/content/content_card.dart';
 import 'package:git_hub_tracker/core/constants/styles/main_styles.dart';
 
 class ContentDefaultTEXT extends ContentCard {
@@ -8,7 +8,7 @@ class ContentDefaultTEXT extends ContentCard {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(10, 7, 10, 7),
+      padding: const EdgeInsets.fromLTRB(5, 7, 5, 7),
       margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
       decoration: BoxDecoration(
         boxShadow: cBoxShadowItem,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:git_hub_tracker/authentication/logic/github_authenticator.dart';
 import 'package:git_hub_tracker/core/logic/routing/routes.dart';
 import 'package:git_hub_tracker/core/constants/styles/main_styles.dart';
 
@@ -10,9 +11,8 @@ class LogoutButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        //await FirebaseAuth.instance.signOut();
-        Navigator.popUntil(context, (route) => route.isFirst);
-        Navigator.pushNamed(context, kLoginRoute);
+        await authenticator.signOut();
+        Navigator.pushNamed(context, kAuthRoute,);
       },
       child: Container(
         padding: const EdgeInsets.fromLTRB(10, 7, 10, 7),

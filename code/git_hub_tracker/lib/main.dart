@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:git_hub_tracker/authentication/view/login_page.dart';
+import 'package:git_hub_tracker/Core/View/splash_page.dart';
 import 'core/logic/routing/router.dart';
 
 Future<void> main() async {
@@ -14,8 +14,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const LoginPage(),
+      home: const SplashPage(),
       routes: router,
+      navigatorObservers: [routeObserver],
       title: 'GitHub Tracker',
       debugShowCheckedModeBanner: false,
 

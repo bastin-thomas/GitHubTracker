@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:git_hub_tracker/core/constants/const.dart';
+import 'package:git_hub_tracker/core/logic/GitHubLibrary/github_api.dart';
 import 'package:git_hub_tracker/core/view/partials/avatar.dart';
 import 'package:git_hub_tracker/core/view/partials/avatar_websource.dart';
-import 'package:git_hub_tracker/core/view/partials/content_default_text.dart';
 import 'package:git_hub_tracker/feeds/view/partials/feed_card.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import 'partials/drawer/logout_button.dart';
 import 'partials/drawer/resync_button.dart';
@@ -23,11 +26,8 @@ class _FeedPageState extends State<FeedPage> {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = GlobalKey<RefreshIndicatorState>();
 
   Future<void> _refresh() async {
-    //ToDO
-  }
-
-  String getAvatar() {
-    return "user.avatarUrl";
+    print('TryRefresh');
+    setState(() {});
   }
 
   @override
@@ -44,61 +44,56 @@ class _FeedPageState extends State<FeedPage> {
     _scaffoldKey.currentState!.openEndDrawer();
   }
 
-  void _closeEndDrawer() {
-    Navigator.of(context).pop();
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(child: Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
         title: const Text("Feed"),
         leading: const Avatar(imagePath: "assets/images/title.png"),
         actions: <Widget>[
-          IconButton(
-            icon: AvatarWebSource(imagePath: getAvatar()),
-            tooltip: 'UserList',
-            onPressed: _openEndDrawer,
-          ),
+          FutureBuilder<String>(
+              future: GitHubApiSingleTon.api.getCurrentUserAvatar(),
+              builder: (BuildContext context, AsyncSnapshot<String> future){
+                if(future.hasData){
+                  return IconButton(
+                    icon: AvatarWebSource(imagePath: future.data ?? kErrorAvatarUrl),
+                    tooltip: 'UserList',
+                    onPressed: _openEndDrawer,
+                  );
+                }
+                else{
+                  return IconButton(
+                    icon: const AvatarWebSource(imagePath: kErrorAvatarUrl),
+                    tooltip: 'UserList',
+                    onPressed: _openEndDrawer,
+                  );
+                }
+              }),
         ],
       ),
       body: RefreshIndicator(
         key: _refreshIndicatorKey,
       onRefresh: _refresh,
-      child: ListView(
-        children: [
-          FeedCard(
-            publishDate: DateTime.now(),
-            image: getAvatar(),
-            userName: "todo",
-            contentCard: const ContentDefaultTEXT(),
-          ),
-          FeedCard(
-            publishDate: DateTime.now(),
-            image: "https://avatars.githubusercontent.com/u/98758556?v=4",
-            userName: "Bidule",
-            contentCard: const ContentDefaultTEXT(),
-          ),
-          FeedCard(
-            publishDate: DateTime.now(),
-            image: "https://avatars.githubusercontent.com/u/98758556?v=4",
-            userName: "Pitite",
-            contentCard: const ContentDefaultTEXT(),
-          ),
-          FeedCard(
-            publishDate: DateTime.now(),
-            image: "https://avatars.githubusercontent.com/u/98758556?v=4",
-            userName: "Oui-Oui",
-            contentCard: const ContentDefaultTEXT(),
-          ),
-          FeedCard(
-            publishDate: DateTime.now(),
-            image: "https://avatars.githubusercontent.com/u/98758556?v=4",
-            userName: "Non-Non",
-            contentCard: const ContentDefaultTEXT(),
-          ),
-        ],
+      child: FutureBuilder<List<FeedCard>>(
+        future: GitHubApiSingleTon.api.getFeed(kFeedRowNumber),
+        builder: (context, future){
+          if(!future.hasData){
+            return Center(
+              child: LoadingAnimationWidget.discreteCircle(color: kDefaultIconDarkColor, size: 200),
+            );
+          }else{
+            List<FeedCard> feed = future.data!;
+            return ListView.builder(
+                addAutomaticKeepAlives: true,
+                itemBuilder: (context, index){
+                  return feed[index];
+                },
+                itemCount: feed.length,
+            );
+          }
+        },
       ),
       ),
       endDrawer: Drawer(
@@ -115,6 +110,11 @@ class _FeedPageState extends State<FeedPage> {
           ),
         ),
       ),
+    ),
+    onWillPop: () async{
+        SystemNavigator.pop();
+        return false;
+      },
     );
   }
 }

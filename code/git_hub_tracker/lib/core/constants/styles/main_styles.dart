@@ -26,6 +26,8 @@ final kBoxDecoration = BoxDecoration(
 const kBorderRadius15 = BorderRadius.all(Radius.circular(15));
 const BorderRadius kBorderRadius10 = BorderRadius.all(Radius.circular(10));
 
+const kPayloadTextColor = Color.fromRGBO(200, 200, 200, 1);
+
 List<BoxShadow> kBoxShadowItem = [
   BoxShadow(
     color: Colors.black.withOpacity(0.16),

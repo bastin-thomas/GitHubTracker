@@ -20,6 +20,7 @@ class EmailInput extends StatelessWidget {
         } else if (!EmailValidator.validate(value)) {
           return 'L’adresse mail doit être une adresse mail valide.';
         }
+        return null;
       },
       onChanged: onChanged,
     );

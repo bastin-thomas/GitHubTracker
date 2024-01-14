@@ -18,20 +18,17 @@ dependencies:
   cached_network_image: ^3.2.3
   simple_chips_input: ^1.0.0
 
-  github: ^9.17.0
+  github: ^9.22.0
 
   oauth2: ^2.0.2
   flutter_secure_storage: ^9.0.0
 
   dio: ^5.3.3
-  flutter_hooks: ^0.20.3
-  hooks_riverpod: ^3.0.0-dev.0
-  freezed_annotation: ^2.4.1
-
-  #maybe to delete
-  dartz: ^0.10.1
   webview_flutter: ^4.4.2
-  flash: ^3.0.5+2
+  url_launcher: ^6.2.3
+  loading_animation_widget: ^1.2.0+4
+  flutter_emoji: ^2.5.1
+  axis_layout: ^1.0.1
 
 
 
@@ -40,7 +37,6 @@ dev_dependencies:
     sdk: flutter
 
   build_runner: ^2.0.1
-  freezed: ^2.4.5
 
   flutter_lints: ^2.0.0
 

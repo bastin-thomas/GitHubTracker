@@ -21,8 +21,8 @@ class _TrackedRepositoryState extends State<TrackedRepository> {
           color: Colors.black45,
           borderRadius: const BorderRadius.all(Radius.circular(5))),
       child: Column(children: [
-        Row(
-          children: const [
+        const Row(
+          children: [
             Text(
               "Repository Traqué",
               style: TextStyle(color: Colors.white),
