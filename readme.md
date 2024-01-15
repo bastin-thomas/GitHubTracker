@@ -39,10 +39,8 @@ L'autre triste nouvelle est que l'application Github officiel ne permet pas de t
 
 - *En tant qu'utilisateur* je peux sélectionner un ou plusieurs utilisateurs (dont moi même) afin de filtré temporairement mon feed en ne voyant que ceux souhaités.
 - *En tant qu'utilisateur* je peux sélectionner un ou plusieurs Repository (dont les miens) afin de filtré temporairement mon feed en ne voyant que ceux souhaités.
-- *En tant qu'utilisateur* je peux sélectionner un ou plusieurs Type de message du feed (pull request, issues,  starred, commits...) afin de filtré temporairement mon feed en ne voyant que ceux souhaités.
 
-- *En tant qu'utilisateur* je peux sélectionner un thème claire ou un thème foncé afin d'ajusté au mieux mes envies du moment.
-- *En tant qu'utilisateur* je peux navigué jusqu'a une page d'information donnant plus de contexte a la création de l'application.
+- *En tant qu'utilisateur* je peux sélectionner un ou plusieurs Type de message du feed (pull request, issues,  starred, commits...) afin de filtré temporairement mon feed en ne voyant que ceux souhaités.
 
 ## 💻|Mockup:
 ![Image montrant les mockups.](https://media.discordapp.net/attachments/431911532675465241/1052160423023095828/ToUpload.png)
@@ -63,18 +61,18 @@ L'autre triste nouvelle est que l'application Github officiel ne permet pas de t
 
 ✅ Creation des routes Flutters
 
-☐ Creation de la page Principal (Feed)
+✅ Creation de la page Principal (Feed)
 
 ✅ Creation des Widgets représentant les différents Messages du Feed
 
-☐ Creation de la page d'option
+✅ Creation des Payloads représetant les informations de types différentes du Feed
+
+✅ Creation de l'API d'utilisation pour GitHub (récupération du feed, et autres appels en tout genre).
 
 ☐ Ajout de la liste des personnes a traqué
 
 ☐ Ajout de la liste des repository a traqué
 
-☐ Ajout de la liste noire des repository personnels a ne pas traqué
+☐ Persistance des listes avec FireBase
 
 ☐ Creation de la logique de Filtre du Feed
-
-☐ Creation de la page "Information"
