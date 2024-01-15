@@ -23,7 +23,7 @@ Par défaut lors de la première connexion sur l'application, les repository "St
 ## 📱|Application Existante
 Bien entendus GitHub lui même propose déjà quelques choses de similaire sur sa propre Mainpage. Cependant il n'y a quasiment aucun moyen de filtré se feed pour retrouver des informations. De plus il ne ce concentre que sur certains repository, les votres, les starred, les "watched" ou les personnes que vous suivez. Mais peut être que vous ne voulez pas nécessairement être vus par les personnes que vous traqué, dans notre cas cela permet de rester relativement anonyme a ce niveau.
 
-![Image montrant le feed de Github](https://raw.githubusercontent.com/bastin-thomas/GitHubTracker/main/MockUp/FeedsImage.png?token=GHSAT0AAAAAACHX2GCVGMCEEHKG7IR327BKZKWPBQQ)
+![Image montrant le feed de Github](./MockUp/FeedsImage.png)
 
 L'autre triste nouvelle est que l'application Github officiel ne permet pas de traqué des activités sur un seul feed principal. Il existe une fonctionnalité "Explore" Censé vous présenter de nouveau repository, mais nous sommes loin d'un équivalent a notre application.
 
@@ -43,7 +43,8 @@ L'autre triste nouvelle est que l'application Github officiel ne permet pas de t
 - *En tant qu'utilisateur* je peux sélectionner un ou plusieurs Type de message du feed (pull request, issues,  starred, commits...) afin de filtré temporairement mon feed en ne voyant que ceux souhaités.
 
 ## 💻|Mockup:
-![Image montrant les mockups.](./MockUp/FeedsImage.png)
+
+![Image montrant les mockups.](https://media.discordapp.net/attachments/431911532675465241/1052160423023095828/ToUpload.png)
 
 ## ♻️|Etat d'Avancement
 
