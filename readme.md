@@ -43,7 +43,7 @@ L'autre triste nouvelle est que l'application Github officiel ne permet pas de t
 - *En tant qu'utilisateur* je peux sélectionner un ou plusieurs Type de message du feed (pull request, issues,  starred, commits...) afin de filtré temporairement mon feed en ne voyant que ceux souhaités.
 
 ## 💻|Mockup:
-![Image montrant les mockups.](https://media.discordapp.net/attachments/431911532675465241/1052160423023095828/ToUpload.png)
+![Image montrant les mockups.](./MockUp/FeedsImage.png)
 
 ## ♻️|Etat d'Avancement
 
