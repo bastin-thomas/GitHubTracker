@@ -2,6 +2,7 @@
 
 import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/event/payload/payloadModel/github_event_commit.dart';
 import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/event/payload/github_event_payload.dart';
+import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/utils.dart';
 
 class GitHubEventIssue {
   late String url;
@@ -22,9 +23,9 @@ class GitHubEventIssue {
   late List<dynamic> assignees;
   late String milestone;
   late int comments;
-  late String created_at;
-  late String updated_at;
-  late String closed_at;
+  late DateTime created_at;
+  late DateTime updated_at;
+  late DateTime closed_at;
   late String author_association;
   late String active_lock_reason;
   late String body;
@@ -53,9 +54,9 @@ class GitHubEventIssue {
     assignees = content['assignees'] == null ? 'unkown' : content['assignees']!;
     milestone = content['milestone'] == null ? 'unkown' : content['milestone']!;
     comments = content['comments'] == null ? 'unkown' : content['comments']!;
-    created_at = content['created_at'] == null ? 'unkown' : content['created_at']!;
-    updated_at = content['updated_at'] == null ? 'unkown' : content['updated_at']!;
-    closed_at = content['closed_at'] == null ? 'unkown' : content['closed_at']!;
+    created_at = TimeConverter(content['created_at']);
+    updated_at = TimeConverter(content['updated_at']);
+    closed_at = TimeConverter(content['closed_at']);
     author_association = content['author_association'] == null ? 'unkown' : content['author_association']!;
     active_lock_reason = content['active_lock_reason'] == null ? 'unkown' : content['active_lock_reason']!;
     body = content['body'] == null ? 'unkown' : content['body']!;

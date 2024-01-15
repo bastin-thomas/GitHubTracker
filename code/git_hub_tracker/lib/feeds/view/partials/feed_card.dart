@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:git_hub_tracker/core/constants/const.dart';
 import 'package:git_hub_tracker/core/constants/styles/main_styles.dart';
+import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/utils.dart';
 import 'package:git_hub_tracker/feeds/view/partials/content/content_card.dart';
 import 'package:git_hub_tracker/feeds/view/partials/content/content_default_text.dart';
 import 'package:git_hub_tracker/feeds/view/partials/my_user_tag.dart';
@@ -67,10 +68,7 @@ class FeedCard extends StatelessWidget {
           Column(children: [
               Align(
                 alignment: Alignment.bottomLeft,
-                child: Text(
-                  publishDate.isBefore(DateTime.now().add(const Duration(days: -7)))
-                    ? DateFormat("dd/mm/yyyy HH:mm").format(publishDate)
-                    : "${days[publishDate.weekday]} ${publishDate.hour}:${publishDate.minute}",
+                child: Text(DisplayDate(publishDate),
                   textAlign: TextAlign.left,
                   style: const TextStyle(color: Colors.white70),
                 ),

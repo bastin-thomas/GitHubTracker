@@ -18,28 +18,13 @@ class ContentCardPush extends ContentCard {
       commitList.add(ContentCardCommit(eventCommit: element));
     }
 
-    return Container(
-      padding: const EdgeInsets.fromLTRB(5, 7, 5, 7),
-      margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-      decoration: BoxDecoration(
-        boxShadow: cBoxShadowItem,
-        color: Colors.white10,
-        borderRadius: const BorderRadius.all(Radius.circular(5)),
-      ),
-      child: Column(
-        children: [
-          const Align(
-            alignment: Alignment.topLeft,
-            child: Text(
-            'Pushed commits: ',
-            style: TextStyle(color: kPayloadTextColor, fontWeight: FontWeight.w900),
-            ),
-          ),
-          Column(
-            children: commitList,
-          ),
-        ],
-      ),
+    return Column(
+      children: [
+        Column(
+          children: commitList,
+        ),
+        const Divider(height: 4, color: Colors.transparent),
+      ],
     );
   }
 }

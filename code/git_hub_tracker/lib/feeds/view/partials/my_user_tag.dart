@@ -1,5 +1,6 @@
 import 'package:axis_layout/axis_layout.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_emoji/flutter_emoji.dart';
 import 'package:git_hub_tracker/Core/View/partials/avatar_websource.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -53,7 +54,7 @@ class TitleCard extends StatelessWidget {
                     width: 300,
                     child:
                     Text(
-                      title,
+                      EmojiParser().emojify(title),
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(color: Colors.blueAccent),
                       softWrap: false,
@@ -65,7 +66,7 @@ class TitleCard extends StatelessWidget {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  subtitle,
+                  EmojiParser().emojify(subtitle),
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(color: Colors.white70),
                 ),

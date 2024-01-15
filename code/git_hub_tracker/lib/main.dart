@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:git_hub_tracker/Core/View/splash_page.dart';
+import 'package:intl/intl.dart';
 import 'core/logic/routing/router.dart';
+import 'package:intl/intl_standalone.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  findSystemLocale().then((String locale,){
+    Intl.defaultLocale = locale;
+    initializeDateFormatting();
+
+    WidgetsFlutterBinding.ensureInitialized();
+    runApp(const MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {

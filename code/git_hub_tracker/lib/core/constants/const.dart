@@ -1,7 +1,7 @@
 const String kErrorAvatarUrl = "https://st.depositphotos.com/47577860/52251/v/450/depositphotos_522511702-stock-illustration-error-internet-online-icon-flat.jpg";
 const String kErrorName = "Not Found";
 
-const int kFeedRowNumber = 40;
+const int kFeedRowNumber = 100;
 
 const Map<int, String> days = {
   DateTime.monday: 'Lundi',

@@ -1,4 +1,6 @@
 
+import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/utils.dart';
+
 class GitHubEventComment {
   late String url;
   late String html_url;
@@ -6,8 +8,8 @@ class GitHubEventComment {
   late int id;
   late String node_id;
   late Map<String, dynamic> user;
-  late String created_at;
-  late String updated_at;
+  late DateTime created_at;
+  late DateTime updated_at;
   late String author_association;
   late String body;
   late Map<String, dynamic> reactions;
@@ -21,8 +23,8 @@ class GitHubEventComment {
     id = content['id'] == null ? -1 : content['id']!;
     node_id = content['node_id'] == null ? 'unkown' : content['node_id']!;
     user = content['user'] == null ? {} : content['user']!;
-    created_at = content['created_at'] == null ? 'unkown' : content['created_at']!;
-    updated_at = content['updated_at'] == null ? 'unkown' : content['updated_at']!;
+    created_at = TimeConverter(content['created_at']);
+    updated_at = TimeConverter(content['updated_at']);
     author_association = content['author_association'] == null ? 'unkown' : content['author_association']!;
     body = content['body'] == null ? 'unkown' : content['body']!;
     reactions = content['reactions'] == null ? 'unkown' : content['reactions']!;

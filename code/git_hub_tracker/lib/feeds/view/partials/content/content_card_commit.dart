@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
-import 'package:git_hub_tracker/core/constants/const.dart';
 import 'package:git_hub_tracker/core/constants/styles/main_styles.dart';
 import 'package:git_hub_tracker/core/logic/GitHubLibrary/github_api.dart';
 import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/event/payload/payloadModel/github_event_commit.dart';
-import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/repository/github_commit.dart';
+import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/others/github_commit.dart';
+import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/utils.dart';
 import 'package:git_hub_tracker/core/view/partials/small_avatar_websource.dart';
-import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContentCardCommit extends StatefulWidget {
@@ -50,7 +49,7 @@ class _ContentCardCommitState extends State<ContentCardCommit> {
                   },
                   child: Container(
                     width: double.infinity,
-                    decoration: kBoxDecoration,
+                    decoration: kBoxDecorationInner,
                     padding: const EdgeInsets.symmetric(
                       horizontal: 10,
                       vertical: 10,
@@ -66,18 +65,14 @@ class _ContentCardCommitState extends State<ContentCardCommit> {
                               fontWeight: FontWeight.bold,
                               fontSize: 18),
                         ),
+                        const Divider(height: 4, color: Colors.transparent,),
                         Row(
                           children: [
                             SmallAvatarWebSource(
                               imagePath: commit.author_avatar,
                             ),
                             const VerticalDivider(color: Colors.white),
-                            Text(
-                              commit.date.isBefore(DateTime.now()
-                                      .add(const Duration(days: -7)))
-                                  ? DateFormat("dd/mm/yyyy HH:mm")
-                                      .format(commit.date)
-                                  : "${days[commit.date.weekday]} ${commit.date.hour}:${commit.date.minute}",
+                            Text(DisplayDate(commit.date),
                               style: const TextStyle(
                                   color: Colors.white38, fontSize: 12),
                             ),
@@ -116,9 +111,9 @@ class _ContentCardCommitState extends State<ContentCardCommit> {
               }
 
               return Container(
-                height: 75,
+                height: 70,
                 width: double.infinity,
-                decoration: kBoxDecoration,
+                decoration: kBoxDecorationInner,
                 padding: const EdgeInsets.symmetric(
                   horizontal: 3,
                   vertical: 3,

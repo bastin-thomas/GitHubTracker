@@ -11,11 +11,18 @@ class GitHubEventPayload {
   }
 
 
-  static const String PUSH = 'PushEvent';
+  static const String PUSH =          'PushEvent';
+  static const String ISSUE =         'IssuesEvent';
   static const String ISSUE_COMMENT = 'IssueCommentEvent';
-  static const String CREATE = 'CreateEvent';
-  static const String FORK = 'ForkEvent';
-  static const String WATCH = 'WatchEvent';
-  static const String PUBLIC = 'PublicEvent';
-  static const String DELETE = 'DeleteEvent';
+  static const String WATCH =         'WatchEvent';
+
+  static const String PUBLIC =      'PublicEvent';
+  static const String CREATE =      'CreateEvent';
+  static const String REALESE =     'ReleaseEvent';
+  static const String DELETE =      'DeleteEvent';
+
+  static const String PULLREQUEST = 'PullRequestEvent';
+  static const String FORK =        'ForkEvent';
+
+  static const String MEMBER =      'MemberEvent';
 }

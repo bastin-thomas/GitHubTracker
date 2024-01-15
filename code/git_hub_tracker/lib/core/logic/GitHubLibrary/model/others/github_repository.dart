@@ -1,11 +1,11 @@
 import 'package:git_hub_tracker/core/constants/const.dart';
-import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/repository/github_owner.dart';
+import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/others/github_owner.dart';
 
 class GitHubRepository {
   late int id;
   late String name;
   late String fullName;
-  late String url;
+  late String html_url;
   late String description;
   late int star;
   late int watch;
@@ -16,7 +16,7 @@ class GitHubRepository {
     id = content['id'] == null ? -1 : content['id']!;
     name = content['name'] == null ? kErrorName : content['name']!;
     fullName = content['full_name'] == null ? kErrorName : content['full_name']!;
-    url = content['html_url'] == null ? 'unkown' : content['html_url']!;
+    html_url = content['html_url'] == null ? 'unkown' : content['html_url']!;
     description = content['description'] == null ? 'unkown' : content['description']!;
     star = content['stargazers_count'] == null ? 0 : content['stargazers_count']!;
     watch = content['watchers_count'] == null ? 0 : content['watchers_count']!;
