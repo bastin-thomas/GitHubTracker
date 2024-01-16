@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_emoji/flutter_emoji.dart';
 import 'package:git_hub_tracker/core/constants/styles/main_styles.dart';
 import 'package:git_hub_tracker/feeds/view/partials/content/content_card.dart';
+import 'package:markdown_viewer/markdown_viewer.dart';
 
 class ContentCardText extends ContentCard {
   final String text;
@@ -17,9 +19,14 @@ class ContentCardText extends ContentCard {
         color: Colors.white10,
         borderRadius: const BorderRadius.all(Radius.circular(5)),
       ),
-      child: Text(
-        text,
-        style: const TextStyle(color: Color.fromRGBO(200, 200, 200, 1)),
+      child: MarkdownViewer(
+        EmojiParser().emojify(text),
+        styleSheet: const MarkdownStyle(
+          textStyle: TextStyle(
+              color: kPayloadTextColor,
+              fontWeight: FontWeight.normal,
+              fontSize: 14),
+        ),
       ),
     );
   }

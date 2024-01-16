@@ -12,10 +12,8 @@ import 'partials/drawer/resync_button.dart';
 import 'partials/drawer/tracked_repository.dart';
 import 'partials/drawer/tracked_users.dart';
 
-
 class FeedPage extends StatefulWidget {
   const FeedPage({Key? key}) : super(key: key);
-
 
   @override
   State<FeedPage> createState() => _FeedPageState();
@@ -23,11 +21,21 @@ class FeedPage extends StatefulWidget {
 
 class _FeedPageState extends State<FeedPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = GlobalKey<RefreshIndicatorState>();
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+      GlobalKey<RefreshIndicatorState>();
+
+  final List<FeedCard> feedCards = [];
 
   Future<void> _refresh() async {
-    print('TryRefresh');
-    setState(() {});
+    if(kDebugMode) print('TryRefresh');
+
+    var list = await GitHubApiSingleTon.api.getFeed(kFeedRowNumber);
+    feedCards.clear();
+    feedCards.addAll(list);
+
+    return Future.delayed(
+      const Duration(seconds:0),
+    );
   }
 
   @override
@@ -44,74 +52,83 @@ class _FeedPageState extends State<FeedPage> {
     _scaffoldKey.currentState!.openEndDrawer();
   }
 
-
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(child: Scaffold(
-      key: _scaffoldKey,
-      appBar: AppBar(
-        title: const Text("Feed"),
-        leading: const Avatar(imagePath: "assets/images/title.png"),
-        actions: <Widget>[
-          FutureBuilder<String>(
-              future: GitHubApiSingleTon.api.getCurrentUserAvatar(),
-              builder: (BuildContext context, AsyncSnapshot<String> future){
-                if(future.hasData){
-                  return IconButton(
-                    icon: AvatarWebSource(imagePath: future.data ?? kErrorAvatarUrl),
-                    tooltip: 'UserList',
-                    onPressed: _openEndDrawer,
-                  );
+    return WillPopScope(
+      child: Scaffold(
+        key: _scaffoldKey,
+        appBar: AppBar(
+          title: const Text("Feed"),
+          leading: const Avatar(imagePath: "assets/images/title.png"),
+          actions: <Widget>[
+            FutureBuilder<String>(
+                future: GitHubApiSingleTon.api.getCurrentUserAvatar(),
+                builder: (BuildContext context, AsyncSnapshot<String> future) {
+                  if (future.hasData) {
+                    return IconButton(
+                      icon: AvatarWebSource(
+                          imagePath: future.data ?? kErrorAvatarUrl),
+                      tooltip: 'UserList',
+                      onPressed: _openEndDrawer,
+                    );
+                  } else {
+                    return IconButton(
+                      icon: const AvatarWebSource(imagePath: kErrorAvatarUrl),
+                      tooltip: 'UserList',
+                      onPressed: _openEndDrawer,
+                    );
+                  }
+                }),
+          ],
+        ),
+        body: RefreshIndicator(
+          key: _refreshIndicatorKey,
+          onRefresh: _refresh,
+          child: FutureBuilder<List<FeedCard>>(
+            future: GitHubApiSingleTon.api.getFeed(kFirstFeedRowNumber),
+            builder: (BuildContext context, AsyncSnapshot<List<FeedCard>> snapshot){
+              if(snapshot.hasError){
+                if (kDebugMode) {
+                  print("ERROR: ${snapshot.error.toString()} \n StackTrace: ${snapshot.stackTrace}");
                 }
-                else{
-                  return IconButton(
-                    icon: const AvatarWebSource(imagePath: kErrorAvatarUrl),
-                    tooltip: 'UserList',
-                    onPressed: _openEndDrawer,
-                  );
-                }
-              }),
-        ],
-      ),
-      body: RefreshIndicator(
-        key: _refreshIndicatorKey,
-      onRefresh: _refresh,
-      child: FutureBuilder<List<FeedCard>>(
-        future: GitHubApiSingleTon.api.getFeed(kFeedRowNumber),
-        builder: (context, future){
-          if(!future.hasData){
-            return Center(
-              child: LoadingAnimationWidget.discreteCircle(color: kDefaultIconDarkColor, size: 200),
-            );
-          }else{
-            List<FeedCard> feed = future.data!;
-            return ListView.builder(
-                addAutomaticKeepAlives: true,
-                itemBuilder: (context, index){
-                  return feed[index];
-                },
-                itemCount: feed.length,
-            );
-          }
-        },
-      ),
-      ),
-      endDrawer: Drawer(
-        child: Container(
-          margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-          child: ListView(
-            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const <Widget>[
-              ReSyncButton(),
-              TrackedRepository(),
-              TrackedUser(),
-              LogoutButton(),
-            ],
+
+                return const Center(
+                  child: Text('The GitHub API Limit has been reached. Please try Later...'),
+                );
+              }
+
+              if(snapshot.hasData){
+                feedCards.clear();
+                feedCards.addAll(snapshot.data!);
+                return ListView(
+                  children: feedCards,
+                );
+              }
+              else {
+                return Center(
+                  child: LoadingAnimationWidget.discreteCircle(color: kDefaultIconDarkColor, size: 200),
+                );
+              }
+            },
+          ),
+
+        ),
+        endDrawer: Drawer(
+          child: Container(
+            margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+            child: ListView(
+              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const <Widget>[
+                ReSyncButton(),
+                TrackedRepository(),
+                TrackedUser(),
+                LogoutButton(),
+              ],
+            ),
           ),
         ),
       ),
-    ),
-    onWillPop: () async{
+      onWillPop: () async {
         SystemNavigator.pop();
         return false;
       },

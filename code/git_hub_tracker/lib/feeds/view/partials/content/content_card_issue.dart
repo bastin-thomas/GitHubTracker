@@ -5,9 +5,10 @@ import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/event/github_even
 import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/event/payload/github_event_payload_issue.dart';
 import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/others/github_issue.dart';
 import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/utils.dart';
+import 'package:git_hub_tracker/core/view/partials/link_launcher.dart';
 import 'package:git_hub_tracker/core/view/partials/small_avatar_websource.dart';
 import 'package:git_hub_tracker/feeds/view/partials/content/content_card.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:markdown_viewer/markdown_viewer.dart';
 
 class ContentCardIssue extends ContentCard {
   final GitHubEventPayloadIssue payload;
@@ -18,7 +19,6 @@ class ContentCardIssue extends ContentCard {
 
   @override
   Widget build(BuildContext context) {
-    bool singleTap = true;
 
     return Align(
       alignment: Alignment.centerLeft,
@@ -26,18 +26,8 @@ class ContentCardIssue extends ContentCard {
         alignment: WrapAlignment.start,
         children: [
           const Divider(height: 4, color: Colors.transparent),
-          GestureDetector(
-            onTap: () async {
-              if (singleTap) {
-                await launchUrl( Uri.parse(payload.issue.html_url));
-                singleTap = false;
-              }
-
-              //reset after some times
-              Future.delayed(const Duration(milliseconds: 250)).then((value) {
-                singleTap = true;
-              });
-            },
+          LinkLauncher(
+            url: payload.issue.html_url,
             child: Container(
               width: double.infinity,
               decoration: kBoxDecorationInner,
@@ -64,13 +54,16 @@ class ContentCardIssue extends ContentCard {
                     ),
                   ),
 
-                  Text(
+                  MarkdownViewer(
                     EmojiParser().emojify(issue.body),
-                    style: const TextStyle(
-                        color: kPayloadTextColor,
-                        fontWeight: FontWeight.normal,
-                        fontSize: 14),
+                    styleSheet: const MarkdownStyle(
+                      textStyle: TextStyle(
+                          color: kPayloadTextColor,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 14),
+                    ),
                   ),
+                  const Divider(height: 3, color: Colors.transparent,),
                   Row(
                     children: [
                       SmallAvatarWebSource(
@@ -87,13 +80,18 @@ class ContentCardIssue extends ContentCard {
                         alignment: Alignment.bottomRight,
                         child: Row(
                           children: [
-
                             Text(
-                              EmojiParser().emojify('${issue.reactions['+1']} :+1:'),
+                              '${issue.reactions['+1']}',
                               textAlign: TextAlign.right,
                               style: const TextStyle(
-                                  color: Colors.white30,
+                                  color: Colors.white38,
                                   fontSize: 12),
+                            ),
+                            Text(
+                              EmojiParser().emojify(' :+1:'),
+                              textAlign: TextAlign.right,
+                              style: const TextStyle(
+                                  color: Colors.white70, fontSize: 12),
                             ),
                             const Text(
                               ' | ',
@@ -102,10 +100,16 @@ class ContentCardIssue extends ContentCard {
                                   color: Colors.white38, fontSize: 12),
                             ),
                             Text(
-                              EmojiParser().emojify('   ${issue.reactions['-1']} :-1:'),
+                              '   ${issue.reactions['-1']}',
                               textAlign: TextAlign.right,
                               style: const TextStyle(
-                                  color: Colors.white30, fontSize: 12),
+                                  color: Colors.white38, fontSize: 12),
+                            ),
+                            Text(
+                              EmojiParser().emojify(' :-1:'),
+                              textAlign: TextAlign.right,
+                              style: const TextStyle(
+                                  color: Colors.white70, fontSize: 12),
                             ),
                           ],
                         ),

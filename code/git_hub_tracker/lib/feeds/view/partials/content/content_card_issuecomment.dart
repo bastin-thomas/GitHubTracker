@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
-import 'package:git_hub_tracker/core/constants/const.dart';
 import 'package:git_hub_tracker/core/constants/styles/main_styles.dart';
 import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/event/payload/github_event_payload_issuecomment.dart';
 import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/others/github_issue_comment.dart';
+import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/utils.dart';
+import 'package:git_hub_tracker/core/view/partials/link_launcher.dart';
 import 'package:git_hub_tracker/core/view/partials/small_avatar_websource.dart';
 import 'package:git_hub_tracker/feeds/view/partials/content/content_card.dart';
-import 'package:intl/intl.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:markdown_viewer/markdown_viewer.dart';
 
-import '../../../../core/logic/GitHubLibrary/model/utils.dart';
 
 class ContentCardIssueComment extends ContentCard {
   final GitHubEventPayloadIssueComment eventIssueComment;
@@ -18,7 +17,6 @@ class ContentCardIssueComment extends ContentCard {
 
   @override
   Widget build(BuildContext context) {
-    bool singleTap = true;
 
     return Align(
       alignment: Alignment.centerLeft,
@@ -26,18 +24,8 @@ class ContentCardIssueComment extends ContentCard {
         alignment: WrapAlignment.start,
         children: [
           const Divider(height: 4, color: Colors.transparent),
-          GestureDetector(
-            onTap: () async {
-              if (singleTap) {
-                await launchUrl( Uri.parse(eventIssueComment.comment.html_url));
-                singleTap = false;
-              }
-
-              //reset after some times
-              Future.delayed(const Duration(milliseconds: 250)).then((value) {
-                singleTap = true;
-              });
-            },
+          LinkLauncher(
+            url: Uri.parse(eventIssueComment.comment.html_url),
             child: Container(
               width: double.infinity,
               decoration: kBoxDecorationInner,
@@ -49,13 +37,16 @@ class ContentCardIssueComment extends ContentCard {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  MarkdownViewer(
                     EmojiParser().emojify(issueComment.body),
-                    style: const TextStyle(
-                        color: kPayloadTextColor,
-                        fontWeight: FontWeight.normal,
-                        fontSize: 18),
+                    styleSheet: const MarkdownStyle(
+                      textStyle: TextStyle(
+                          color: kPayloadTextColor,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 14),
+                    ),
                   ),
+                  const Divider(height: 3, color: Colors.transparent,),
                   Row(
                     children: [
                       SmallAvatarWebSource(
@@ -72,13 +63,18 @@ class ContentCardIssueComment extends ContentCard {
                         alignment: Alignment.bottomRight,
                         child: Row(
                           children: [
-
                             Text(
-                              EmojiParser().emojify('${issueComment.reactions['+1']} :+1:'),
+                              '${issueComment.reactions['+1']}',
                               textAlign: TextAlign.right,
                               style: const TextStyle(
-                                  color: Colors.white30,
+                                  color: Colors.white38,
                                   fontSize: 12),
+                            ),
+                            Text(
+                              EmojiParser().emojify(' :+1:'),
+                              textAlign: TextAlign.right,
+                              style: const TextStyle(
+                                  color: Colors.white70, fontSize: 12),
                             ),
                             const Text(
                               ' | ',
@@ -87,10 +83,16 @@ class ContentCardIssueComment extends ContentCard {
                                   color: Colors.white38, fontSize: 12),
                             ),
                             Text(
-                              EmojiParser().emojify('   ${issueComment.reactions['-1']} :-1:'),
+                              '   ${issueComment.reactions['-1']}',
                               textAlign: TextAlign.right,
                               style: const TextStyle(
-                                  color: Colors.white30, fontSize: 12),
+                                  color: Colors.white38, fontSize: 12),
+                            ),
+                            Text(
+                              EmojiParser().emojify(' :-1:'),
+                              textAlign: TextAlign.right,
+                              style: const TextStyle(
+                                  color: Colors.white70, fontSize: 12),
                             ),
                           ],
                         ),

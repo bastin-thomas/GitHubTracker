@@ -1,3 +1,4 @@
+import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/event/payload/github_event_payload_create.dart';
 import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/event/payload/github_event_payload_issue.dart';
 import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/event/payload/github_event_payload_issuecomment.dart';
 import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/event/payload/github_event_payload_watch.dart';
@@ -7,7 +8,6 @@ import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/event/payload/git
 import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/event/payload/github_event_payload_push.dart';
 import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/utils.dart';
 
-import 'payload/payloadModel/github_event_issue.dart';
 
 class GitHubEvent {
   late int id;
@@ -32,16 +32,14 @@ class GitHubEvent {
 
     if(type == GitHubEventPayload.PUSH){
       payload = GitHubEventPayloadPush(type, content['payload']);
-
     } else if(type == GitHubEventPayload.ISSUE_COMMENT){
       payload = GitHubEventPayloadIssueComment(type, content['payload']);
-
     } else if(type == GitHubEventPayload.WATCH){
       payload = GitHubEventPayloadWatch(type, content['payload']);
-
     } else if(type == GitHubEventPayload.ISSUE){
       payload = GitHubEventPayloadIssue(type, content['payload']);
-
+    } else if(type == GitHubEventPayload.CREATE) {
+      payload = GitHubEventPayloadCreate(type, content['payload']);
     } else {
       payload = GitHubEventPayload(type, content['payload']);
     }

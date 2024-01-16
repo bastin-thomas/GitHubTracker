@@ -40,7 +40,7 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
 
   @override
   Widget build(BuildContext context) {
-      final WebViewController _controller = WebViewController()
+      final WebViewController controller = WebViewController()
         ..setJavaScriptMode(JavaScriptMode.unrestricted)
         ..clearCache()
         ..clearLocalStorage()
@@ -72,7 +72,7 @@ class _AuthorizationPageState extends State<AuthorizationPage> {
     return Scaffold(
       body: SafeArea(
         child: WebViewWidget(
-          controller: _controller,
+          controller: controller,
         ),
       ),
       );

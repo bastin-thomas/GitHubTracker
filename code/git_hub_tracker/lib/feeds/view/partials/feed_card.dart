@@ -5,7 +5,6 @@ import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/utils.dart';
 import 'package:git_hub_tracker/feeds/view/partials/content/content_card.dart';
 import 'package:git_hub_tracker/feeds/view/partials/content/content_default_text.dart';
 import 'package:git_hub_tracker/feeds/view/partials/my_user_tag.dart';
-import 'package:intl/intl.dart';
 
 class FeedCardFactory{
   static FeedCard Default(){

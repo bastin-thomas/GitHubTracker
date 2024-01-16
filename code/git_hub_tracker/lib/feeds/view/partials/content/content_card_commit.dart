@@ -5,8 +5,9 @@ import 'package:git_hub_tracker/core/logic/GitHubLibrary/github_api.dart';
 import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/event/payload/payloadModel/github_event_commit.dart';
 import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/others/github_commit.dart';
 import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/utils.dart';
+import 'package:git_hub_tracker/core/view/partials/link_launcher.dart';
 import 'package:git_hub_tracker/core/view/partials/small_avatar_websource.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:markdown_viewer/markdown_viewer.dart';
 
 class ContentCardCommit extends StatefulWidget {
   final GitHubEventCommit eventCommit;
@@ -32,21 +33,8 @@ class _ContentCardCommitState extends State<ContentCardCommit> {
             builder: (context, future) {
               if (future.hasData) {
                 GitHubCommit commit = future.data!;
-                return GestureDetector(
-                  onTap: () async {
-                    if (singleTap) {
-                      if (commit.html_url != Uri.http('127.0.0.1', '/').path) {
-                        await launchUrl(commit.html_url);
-                      }
-                      singleTap = false;
-                    }
-
-                    //reset after some times
-                    Future.delayed(const Duration(milliseconds: 250))
-                        .then((value) {
-                      singleTap = true;
-                    });
-                  },
+                return LinkLauncher(
+                  url: commit.html_url,
                   child: Container(
                     width: double.infinity,
                     decoration: kBoxDecorationInner,
@@ -58,14 +46,18 @@ class _ContentCardCommitState extends State<ContentCardCommit> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        MarkdownViewer(
                           EmojiParser().emojify(widget.eventCommit.message),
-                          style: const TextStyle(
-                              color: kPayloadTextColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18),
+                          styleSheet: const MarkdownStyle(
+                            textStyle: TextStyle(
+                                color: kPayloadTextColor,
+                                fontWeight: FontWeight.normal,
+                                fontSize: 15),
+                          ),
+                          selectable: false,
+                          enableImageSize: true,
                         ),
-                        const Divider(height: 4, color: Colors.transparent,),
+                        const Divider(height: 3, color: Colors.transparent,),
                         Row(
                           children: [
                             SmallAvatarWebSource(

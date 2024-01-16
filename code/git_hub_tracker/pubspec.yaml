@@ -29,6 +29,7 @@ dependencies:
   loading_animation_widget: ^1.2.0+4
   flutter_emoji: ^2.5.1
   axis_layout: ^1.0.1
+  markdown_viewer: ^0.6.2
 
 
 

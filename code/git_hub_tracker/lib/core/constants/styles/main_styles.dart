@@ -45,3 +45,16 @@ List<BoxShadow> kBoxShadowItem = [
 ];
 
 const appScheme = 'flutterdemo';
+
+
+const kDefaultPayloadTextStyle = TextStyle(
+    color: kPayloadTextColor,
+    fontWeight: FontWeight.normal,
+    fontSize: 14,
+);
+
+const kBoldPayloadTextStyle = TextStyle(
+    color: kPayloadTextColor,
+    fontWeight: FontWeight.bold,
+    fontSize: 14,
+);

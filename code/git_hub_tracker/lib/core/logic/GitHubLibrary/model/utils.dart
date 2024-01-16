@@ -15,7 +15,5 @@ DateTime TimeConverter(String? date){
 
 String DisplayDate(DateTime date){
   return date.isBefore(DateTime.now().add(const Duration(days: -7)))
-      ? DateFormat("dd/mm/yyyy HH:mm")
-      .format(date)
-      : DateFormat("EEEE HH:mm").format(date);
+      ? DateFormat("dd/MM/yyyy HH:mm").format(date) : DateFormat("EEEE HH:mm").format(date);
 }

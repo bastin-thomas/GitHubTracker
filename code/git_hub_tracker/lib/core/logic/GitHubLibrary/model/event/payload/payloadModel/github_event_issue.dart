@@ -10,7 +10,7 @@ class GitHubEventIssue {
   late String labels_url;
   late String comments_url;
   late String events_url;
-  late String html_url;
+  late Uri html_url;
   late int id;
   late String node_id;
   late int number;
@@ -41,7 +41,7 @@ class GitHubEventIssue {
     labels_url = content['labels_url'] == null ? 'unkown' : content['labels_url']!;
     comments_url = content['comments_url'] == null ? 'unkown' : content['comments_url']!;
     events_url = content['events_url'] == null ? 'unkown' : content['events_url']!;
-    html_url = content['html_url'] == null ? 'unkown' : content['html_url']!;
+    html_url = Uri.parse(content['html_url'] == null ? '127.0.0.1' : content['html_url']!);
     id = content['id'] == null ? 'unkown' : content['id']!;
     node_id = content['node_id'] == null ? 'unkown' : content['node_id']!;
     number = content['number'] == null ? 'unkown' : content['number']!;

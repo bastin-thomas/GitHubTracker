@@ -2,6 +2,9 @@ const String kErrorAvatarUrl = "https://st.depositphotos.com/47577860/52251/v/45
 const String kErrorName = "Not Found";
 
 const int kFeedRowNumber = 100;
+const int kFirstFeedRowNumber = 20;
+
+const bool kDebugMode = true;
 
 const Map<int, String> days = {
   DateTime.monday: 'Lundi',
