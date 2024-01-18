@@ -263,6 +263,11 @@ class GitHubApi {
     var repoResponse = await http.get(repoUrl, headers: headers);
     return GitHubIssueComment(jsonDecode(repoResponse.body));
   }
+
+  Future<String> getCurrentUserName() async {
+    User currentUser = await _github.users.getCurrentUser();
+    return currentUser.login ?? 'unkown';
+  }
 }
 
 

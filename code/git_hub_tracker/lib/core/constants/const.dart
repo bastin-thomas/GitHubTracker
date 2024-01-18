@@ -17,3 +17,7 @@ const Map<int, String> days = {
 };
 
 
+const String kUserTraquedTitle = 'Traqued Users';
+const String kRepositoriesTraquedTitle = 'Traqued Repositories';
+
+

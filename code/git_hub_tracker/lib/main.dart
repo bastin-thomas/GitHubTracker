@@ -4,15 +4,22 @@ import 'package:intl/intl.dart';
 import 'core/logic/routing/router.dart';
 import 'package:intl/intl_standalone.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 Future<void> main() async {
-  findSystemLocale().then((String locale,){
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  await findSystemLocale().then((String locale,){
     Intl.defaultLocale = locale;
     initializeDateFormatting();
-
-    WidgetsFlutterBinding.ensureInitialized();
-    runApp(const MyApp());
   });
+
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

@@ -189,22 +189,6 @@ class ContentCardCreateTag extends ContentCard {
                   ),
                 ),
 
-                const VerticalDivider(
-                  width: 3,
-                  color: Colors.transparent,
-                ),
-
-                MarkdownViewer(
-                  EmojiParser().emojify(' have been created by'),
-                  styleSheet: const MarkdownStyle(
-                    textStyle: kDefaultPayloadTextStyle,
-                  ),
-                ),
-
-                const VerticalDivider(
-                  width: 5,
-                  color: Colors.transparent,
-                ),
 
                 IntrinsicWidth(
                   child: LinkLauncher(
@@ -212,6 +196,23 @@ class ContentCardCreateTag extends ContentCard {
                         'https://github.com/${event.actor.login}'),
                     child: Row(
                       children: [
+                        const VerticalDivider(
+                          width: 3,
+                          color: Colors.transparent,
+                        ),
+
+                        MarkdownViewer(
+                          EmojiParser().emojify(' have been created by'),
+                          styleSheet: const MarkdownStyle(
+                            textStyle: kDefaultPayloadTextStyle,
+                          ),
+                        ),
+
+                        const VerticalDivider(
+                          width: 5,
+                          color: Colors.transparent,
+                        ),
+
                         MarkdownViewer(
                           EmojiParser()
                               .emojify(' ${event.actor.display_login}'),
@@ -231,28 +232,6 @@ class ContentCardCreateTag extends ContentCard {
                 const Divider(
                   height: 15,
                   color: Colors.transparent,
-                ),
-                Container(
-                  width: double.infinity,
-                  decoration: kBoxDecorationInner,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 10,
-                  ),
-                  child: Wrap(
-                    children: [
-                      MarkdownViewer(
-                        EmojiParser().emojify('Description: '),
-                        styleSheet: const MarkdownStyle(
-                            textStyle: kBoldPayloadTextStyle),
-                      ),
-                      MarkdownViewer(
-                        EmojiParser().emojify(payload.description),
-                        styleSheet: const MarkdownStyle(
-                            textStyle: kDefaultPayloadTextStyle),
-                      ),
-                    ],
-                  ),
                 ),
               ],
             ),

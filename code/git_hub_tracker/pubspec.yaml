@@ -1,5 +1,5 @@
 name: git_hub_tracker
-description: My Flutter Project for Exams
+description: Track all Github Data to spy !!!
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
@@ -12,11 +12,11 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
-  intl: ^0.18.0
+  intl: ^0.19.0
 
   email_validator: ^2.1.17
   cached_network_image: ^3.2.3
-  simple_chips_input: ^1.0.0
+  simple_chips_input: ^1.2.0
 
   github: ^9.22.0
 
@@ -27,9 +27,16 @@ dependencies:
   webview_flutter: ^4.4.2
   url_launcher: ^6.2.3
   loading_animation_widget: ^1.2.0+4
+
   flutter_emoji: ^2.5.1
   axis_layout: ^1.0.1
+
   markdown_viewer: ^0.6.2
+
+  firebase_core: ^2.24.2
+  cloud_firestore: ^4.14.0
+
+  flutter_helper_utils: ^3.0.3
 
 
 
@@ -39,7 +46,7 @@ dev_dependencies:
 
   build_runner: ^2.0.1
 
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
 
 flutter:
   assets:

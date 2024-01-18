@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:git_hub_tracker/authentication/logic/github_authenticator.dart';
 import 'package:git_hub_tracker/core/logic/routing/routes.dart';
@@ -9,7 +10,7 @@ class LogoutButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: () async {
         await authenticator.signOut();
         Navigator.pushNamed(context, kAuthRoute,);
@@ -22,15 +23,15 @@ class LogoutButton extends StatelessWidget {
             color: Colors.black45,
             borderRadius: const BorderRadius.all(Radius.circular(5))
         ),
-        child: Row(
+        child: const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
             children: [
-              const Text("LOGOUT", style: TextStyle(color: Colors.white),),
-              Container(
-                margin: const EdgeInsets.fromLTRB(205, 2, 0, 2),
-                child: const Icon(
-                  Icons.logout_outlined,
-                  color: Colors.red,
-                ),
+              Text("LOGOUT", style: TextStyle(color: kPayloadTextColor),),
+              Icon(
+                Icons.logout_outlined,
+                color: Colors.red,
               ),
             ]),
       ),
