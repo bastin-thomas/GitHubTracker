@@ -61,14 +61,14 @@ class GitHubApi {
 
 
   ///Get Common Feed to Populate feed-page
-  Future<List<FeedCard>> getFeed(int quantity) async {
+  Future<List<FeedCard>> getFeed(int quantity, int page) async {
       final List<FeedCard> list = [];
 
       User currentUser = await _github.users.getCurrentUser();
 
-
       Map<String, String> queryParams = {
         'per_page':'$quantity',
+        'page':'$page',
       };
 
       Map<String, String> headers = {

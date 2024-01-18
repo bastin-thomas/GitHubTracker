@@ -16,7 +16,6 @@ dependencies:
 
   email_validator: ^2.1.17
   cached_network_image: ^3.2.3
-  simple_chips_input: ^1.2.0
 
   github: ^9.22.0
 
@@ -36,8 +35,7 @@ dependencies:
   firebase_core: ^2.24.2
   cloud_firestore: ^4.14.0
 
-  flutter_helper_utils: ^3.0.3
-
+  simple_chips_input: ^1.2.0
 
 
 dev_dependencies:

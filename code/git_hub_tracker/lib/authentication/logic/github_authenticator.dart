@@ -28,9 +28,15 @@ class GitHubAuthenticator {
 
   /// used to signIn on the GithubAPI
   Future<void> signIn(AuthorizationCodeGrant grant, Map<String, String> redirectUrl) async {
-    final httpClient = await grant.handleAuthorizationResponse(redirectUrl);
-    await _credentialStorage.save(httpClient.credentials);
-    grant.close();
+    try{
+      final httpClient = await grant.handleAuthorizationResponse(redirectUrl);
+      await _credentialStorage.save(httpClient.credentials);
+    } on StateError {
+      print('Authorization already granted');
+    } finally {
+      grant.close();
+    }
+
   }
 
 

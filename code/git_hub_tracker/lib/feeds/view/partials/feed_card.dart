@@ -6,19 +6,6 @@ import 'package:git_hub_tracker/feeds/view/partials/content/content_card.dart';
 import 'package:git_hub_tracker/feeds/view/partials/content/content_default_text.dart';
 import 'package:git_hub_tracker/feeds/view/partials/my_user_tag.dart';
 
-class FeedCardFactory{
-  static FeedCard Default(){
-    return FeedCard(
-      publishDate: DateTime.fromMillisecondsSinceEpoch(0),
-      image: kErrorAvatarUrl,
-      title: kErrorName,
-      uri: Uri.http('127.0.0.1','/'),
-      contentCard: const ContentDefaultTEXT(),
-      subtitle: '',
-    );
-  }
-}
-
 class FeedCard extends StatelessWidget {
   final DateTime publishDate;
   final String image;
@@ -28,13 +15,23 @@ class FeedCard extends StatelessWidget {
   final String subtitle;
 
   const FeedCard(
-      {required this.publishDate,
+      {super.key,
+      required this.publishDate,
       required this.image,
       required this.title,
       required this.uri,
       required this.contentCard,
-      Key? key, required this.subtitle,}
-  ) : super(key: key);
+      required this.subtitle,}
+  );
+
+  factory FeedCard.Default() => FeedCard(
+      publishDate: DateTime.fromMillisecondsSinceEpoch(0),
+      image: kErrorAvatarUrl,
+      title: kErrorName,
+      uri: Uri.http('127.0.0.1','/'),
+      contentCard: const ContentDefaultTEXT(),
+      subtitle: '',
+  );
 
   @override
   Widget build(BuildContext context) {

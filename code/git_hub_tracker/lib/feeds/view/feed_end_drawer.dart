@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:git_hub_tracker/core/constants/const.dart';
-import 'package:git_hub_tracker/core/logic/GitHubLibrary/github_api.dart';
 import 'package:git_hub_tracker/core/model/fire_store_dto_library/store_library.dart';
 import 'package:git_hub_tracker/core/model/fire_store_dto_library/store_user.dart';
 import 'package:git_hub_tracker/feeds/view/partials/drawer/logout_button.dart';
@@ -16,20 +15,10 @@ class FeedPageEndDrawer extends StatefulWidget {
 }
 
 class _FeedPageEndDrawerState extends State<FeedPageEndDrawer> {
-  final _formState = GlobalKey<FormState>();
-  final _formState2 = GlobalKey<FormState>();
-
   late Stream<DocumentSnapshot<StoreUser>>? _userStream;
   List<String> trackedUser = [];
   List<String> trackedRepositories = [];
-
-
-  @override
-  void dispose() {
-    _formState.currentState?.validate();
-    _formState2.currentState?.validate();
-    super.dispose();
-  }
+  late StoreUser currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -53,19 +42,23 @@ class _FeedPageEndDrawerState extends State<FeedPageEndDrawer> {
                     if (snapshot.connectionState == ConnectionState.waiting || snapshot.hasError) {
                       return const WaitingUserData();
                     }
-                    StoreUser user = snapshot.data!.data();
+                    currentUser = snapshot.data!.data();
                     return ListView(
                         children: [
-                          ReSyncButton(onTap: _onResyncButton,),
+                          ReSyncButton(onTap: (){
+                            //TODO: Add the ability to ReSync followed repo etc...
+                          },),
                           TrackChip(
-                            trackedList: user.followed_users,
+                            trackedList: currentUser.followed_users,
                             chipName: kUserTraquedTitle,
-                            globalKey: _formState,
+                            onDelete: onDelete,
+                            onAdded: onAdded,
                           ),
                           TrackChip(
-                            trackedList: user.followed_repository,
+                            trackedList: currentUser.followed_repository,
                             chipName: kRepositoriesTraquedTitle,
-                            globalKey: _formState2,
+                            onDelete: onDelete,
+                            onAdded: onAdded,
                           ),
                           const LogoutButton(),
                         ],
@@ -79,10 +72,21 @@ class _FeedPageEndDrawerState extends State<FeedPageEndDrawer> {
     );
   }
 
-  void _onResyncButton() {
+  ///Redirect Event to On Added
+  onDelete(String value, int index) {
+    onAdded(value);
+  }
 
+  ///Get On Added
+  onAdded(String value,) {
+    if(currentUser != null){
+      print('TEST: ${currentUser.toJson()}');
+      updateUserStore(currentUser);
+    }
   }
 }
+
+
 
 
 

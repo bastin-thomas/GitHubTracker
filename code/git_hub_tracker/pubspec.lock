@@ -342,14 +342,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.5.1"
-  flutter_helper_utils:
-    dependency: "direct main"
-    description:
-      name: flutter_helper_utils
-      sha256: "25cdd2e80048a1c33d36ef6f3902918cbbd4e5fb3016c3f8c8177ef687f79ae6"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.3"
   flutter_lints:
     dependency: "direct dev"
     description:

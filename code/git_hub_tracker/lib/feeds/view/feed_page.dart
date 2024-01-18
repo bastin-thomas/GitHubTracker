@@ -5,7 +5,7 @@ import 'package:git_hub_tracker/core/view/partials/avatar.dart';
 import 'package:git_hub_tracker/core/view/partials/avatar_websource.dart';
 import 'package:git_hub_tracker/feeds/view/feed_end_drawer.dart';
 import 'package:git_hub_tracker/feeds/view/partials/feed_card.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:git_hub_tracker/feeds/view/partials/waiting_feed_card.dart';
 
 class FeedPage extends StatefulWidget {
   const FeedPage({Key? key}) : super(key: key);
@@ -15,15 +15,30 @@ class FeedPage extends StatefulWidget {
 }
 
 class _FeedPageState extends State<FeedPage> {
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
 
-
+  int index = 1;
   final List<FeedCard> _feedCards = [];
 
 
 
+  @override
+  void initState() {
+    super.initState();
+    fetch();
+  }
+
+  Future<void> fetch() async{
+    List<FeedCard> newData = await GitHubApiSingleTon.api.getFeed(kFeedRowNumber, index);
+      setState(() {
+        index++;
+        _feedCards.removeLast();
+        _feedCards.addAll(newData);
+      });
+  }
 
 
   @override
@@ -57,65 +72,48 @@ class _FeedPageState extends State<FeedPage> {
       body: RefreshIndicator(
         key: _refreshIndicatorKey,
         onRefresh: _onRefresh,
-        child: FutureBuilder<List<FeedCard>>(
-          future: GitHubApiSingleTon.api.getFeed(kFirstFeedRowNumber),
-          builder: _onInitialFetch,
+        child:  NotificationListener<ScrollNotification>(
+          onNotification: (notification){
+            if (notification is ScrollEndNotification && notification.metrics.extentAfter == 0) {
+              fetch();
+            }
+            return false;
+          },
+          child: ListView.builder(
+              itemCount: _feedCards.length + 1,
+              itemBuilder: (BuildContext context, int index) {
+                if(index < _feedCards.length){
+                  return _feedCards[index];
+                }
+                else{
+                  _feedCards.add(WaitingFeedCard.Default());
+                }
+              }
+          ),
         ),
+
       ),
       endDrawer: const FeedPageEndDrawer(),
     );
   }
 
   Future<void> _onRefresh() async {
-    var list = await GitHubApiSingleTon.api.getFeed(kFeedRowNumber);
-    _feedCards.clear();
-    _feedCards.addAll(list);
+    var list = await GitHubApiSingleTon.api.getFeed(kFeedRowNumber, 1);
+
+    setState(() {
+      index = 1;
+      _feedCards.clear();
+      _feedCards.addAll(list);
+    });
 
     return Future.delayed(
       const Duration(seconds: 0),
     );
   }
 
+
+
   void _openEndDrawer() {
     _scaffoldKey.currentState!.openEndDrawer();
-  }
-
-  Widget _onInitialFetch(BuildContext context, AsyncSnapshot<List<FeedCard>> snapshot) {
-    if (snapshot.hasError) {
-      return Center(
-        child: IntrinsicHeight(
-          child: Column(
-            children: [
-              LoadingAnimationWidget.hexagonDots(
-                  color: kDefaultIconDarkColor, size: 150),
-              const Divider(
-                height: 20,
-                color: Colors.transparent,
-              ),
-              const Text(
-                  'Impossible to reach GitHub API...'),
-              const Divider(
-                height: 60,
-                color: Colors.transparent,
-              ),
-            ],
-          ),
-        ),
-      );
-    }
-
-    if (snapshot.hasData) {
-      _feedCards.clear();
-      _feedCards.addAll(snapshot.data!);
-      return ListView(
-        cacheExtent: 100.0,
-        children: _feedCards,
-      );
-    } else {
-      return Center(
-        child: LoadingAnimationWidget.hexagonDots(
-            color: kDefaultIconDarkColor, size: 200),
-      );
-    }
   }
 }
