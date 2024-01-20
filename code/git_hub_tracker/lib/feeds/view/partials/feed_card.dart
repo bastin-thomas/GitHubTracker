@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:git_hub_tracker/core/constants/const.dart';
 import 'package:git_hub_tracker/core/constants/styles/main_styles.dart';
-import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/utils.dart';
+import 'package:git_hub_tracker/core/logic/utils.dart';
 import 'package:git_hub_tracker/feeds/view/partials/content/content_card.dart';
 import 'package:git_hub_tracker/feeds/view/partials/content/content_default_text.dart';
 import 'package:git_hub_tracker/feeds/view/partials/my_user_tag.dart';

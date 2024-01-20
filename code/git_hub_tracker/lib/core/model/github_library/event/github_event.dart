@@ -1,12 +1,12 @@
-import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/event/payload/github_event_payload_create.dart';
-import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/event/payload/github_event_payload_issue.dart';
-import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/event/payload/github_event_payload_issuecomment.dart';
-import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/event/payload/github_event_payload_watch.dart';
-import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/event/payload/payloadModel/github_event_actor.dart';
-import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/event/payload/payloadModel/github_event_repo.dart';
-import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/event/payload/github_event_payload.dart';
-import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/event/payload/github_event_payload_push.dart';
-import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/utils.dart';
+import 'package:git_hub_tracker/core/model/github_library/event/payload/github_event_payload_create.dart';
+import 'package:git_hub_tracker/core/model/github_library/event/payload/github_event_payload_issue.dart';
+import 'package:git_hub_tracker/core/model/github_library/event/payload/github_event_payload_issuecomment.dart';
+import 'package:git_hub_tracker/core/model/github_library/event/payload/github_event_payload_watch.dart';
+import 'package:git_hub_tracker/core/model/github_library/event/payload/payload_subtypes/github_event_actor.dart';
+import 'package:git_hub_tracker/core/model/github_library/event/payload/payload_subtypes/github_event_repo.dart';
+import 'package:git_hub_tracker/core/model/github_library/event/payload/github_event_payload.dart';
+import 'package:git_hub_tracker/core/model/github_library/event/payload/github_event_payload_push.dart';
+import 'package:git_hub_tracker/core/logic/utils.dart';
 
 
 class GitHubEvent {

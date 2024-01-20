@@ -1,6 +1,6 @@
-import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/event/payload/payloadModel/github_event_comment.dart';
-import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/event/payload/github_event_payload.dart';
-import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/event/payload/payloadModel/github_event_issue.dart';
+import 'package:git_hub_tracker/core/model/github_library/event/payload/payload_subtypes/github_event_comment.dart';
+import 'package:git_hub_tracker/core/model/github_library/event/payload/github_event_payload.dart';
+import 'package:git_hub_tracker/core/model/github_library/event/payload/payload_subtypes/github_event_issue.dart';
 
 class GitHubEventPayloadIssueComment extends GitHubEventPayload{
   late String action;

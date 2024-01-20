@@ -1,4 +1,4 @@
-import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/event/payload/github_event_payload.dart';
+import 'package:git_hub_tracker/core/model/github_library/event/payload/github_event_payload.dart';
 
 class GitHubEventPayloadCreate extends GitHubEventPayload{
   late String ref;

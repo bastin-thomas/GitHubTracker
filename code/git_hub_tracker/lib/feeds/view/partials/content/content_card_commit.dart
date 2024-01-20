@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
 import 'package:git_hub_tracker/core/constants/styles/main_styles.dart';
-import 'package:git_hub_tracker/core/logic/GitHubLibrary/github_api.dart';
-import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/event/payload/payloadModel/github_event_commit.dart';
-import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/others/github_commit.dart';
-import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/utils.dart';
+import 'package:git_hub_tracker/core/logic/github_api/github_api.dart';
+import 'package:git_hub_tracker/core/model/github_library/event/payload/payload_subtypes/github_event_commit.dart';
+import 'package:git_hub_tracker/core/model/github_library/github_commit.dart';
+import 'package:git_hub_tracker/core/logic/utils.dart';
 import 'package:git_hub_tracker/core/view/partials/link_launcher.dart';
 import 'package:git_hub_tracker/core/view/partials/small_avatar_websource.dart';
 import 'package:markdown_viewer/markdown_viewer.dart';
@@ -100,6 +100,25 @@ class _ContentCardCommitState extends State<ContentCardCommit> {
                     ),
                   ),
                 );
+              }
+              else{
+                return
+                  const Column(
+                    children: [
+                      Divider(height: 10, color: Colors.transparent),
+                      Center(
+                        child: SizedBox(
+                          height: 75,
+                          width: 75,
+                          child: CircularProgressIndicator(
+                            color: Colors.white24,
+                            strokeWidth: 10,
+                          ),
+                        ),
+                      ),
+                      Divider(height: 10, color: Colors.transparent),
+                    ],
+                  );
               }
 
               return Container(

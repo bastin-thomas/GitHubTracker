@@ -1,5 +1,5 @@
 import 'package:git_hub_tracker/core/constants/const.dart';
-import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/others/github_owner.dart';
+import 'package:git_hub_tracker/core/model/github_library/github_owner.dart';
 
 class GitHubRepository {
   late int id;

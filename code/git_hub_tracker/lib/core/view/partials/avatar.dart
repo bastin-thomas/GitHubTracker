@@ -13,6 +13,7 @@ class Avatar extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(24)),
         boxShadow: cBoxShadowItem,
+        color: Colors.white24,
       ),
       child: Image(
         image: AssetImage(imagePath),

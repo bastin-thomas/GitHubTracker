@@ -143,15 +143,21 @@ class TrackedWaiting extends StatelessWidget {
               boxShadow: cBoxShadowItem,
               color: Colors.white10,
               borderRadius: const BorderRadius.all(Radius.circular(5))),
-          child: const Center(
-            child: SizedBox(
-              height: 75,
-              width: 75,
-              child: CircularProgressIndicator(
-                color: kDefaultIconDarkColor,
-                strokeWidth: 10,
+          child: const Column(
+            children: [
+              Divider(height: 10, color: Colors.transparent),
+              Center(
+                child: SizedBox(
+                  height: 75,
+                  width: 75,
+                  child: CircularProgressIndicator(
+                    color: kDefaultIconDarkColor,
+                    strokeWidth: 10,
+                  ),
+                ),
               ),
-            ),
+              Divider(height: 10, color: Colors.transparent),
+            ],
           ),
         ),
       ]),

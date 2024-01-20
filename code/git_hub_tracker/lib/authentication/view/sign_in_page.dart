@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:git_hub_tracker/authentication/logic/github_authenticator.dart';
 import 'package:git_hub_tracker/authentication/view/partials/form_header.dart';
 import 'package:git_hub_tracker/core/constants/styles/main_styles.dart';
-import 'package:git_hub_tracker/core/logic/GitHubLibrary/github_api.dart';
+import 'package:git_hub_tracker/core/logic/github_api/github_api.dart';
 import 'package:git_hub_tracker/core/logic/routing/routes.dart';
 import 'package:oauth2/oauth2.dart';
 

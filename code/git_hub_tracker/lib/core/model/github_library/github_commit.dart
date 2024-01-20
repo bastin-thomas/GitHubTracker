@@ -1,5 +1,5 @@
 
-import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/utils.dart';
+import 'package:git_hub_tracker/core/logic/utils.dart';
 
 class GitHubCommit {
   late String author_avatar;

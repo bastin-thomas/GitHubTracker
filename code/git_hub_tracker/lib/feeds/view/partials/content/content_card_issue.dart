@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
 import 'package:git_hub_tracker/core/constants/styles/main_styles.dart';
-import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/event/github_event.dart';
-import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/event/payload/github_event_payload_issue.dart';
-import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/others/github_issue.dart';
-import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/utils.dart';
+import 'package:git_hub_tracker/core/model/github_library/event/github_event.dart';
+import 'package:git_hub_tracker/core/model/github_library/event/payload/github_event_payload_issue.dart';
+import 'package:git_hub_tracker/core/model/github_library/github_issue.dart';
+import 'package:git_hub_tracker/core/logic/utils.dart';
 import 'package:git_hub_tracker/core/view/partials/link_launcher.dart';
 import 'package:git_hub_tracker/core/view/partials/small_avatar_websource.dart';
 import 'package:git_hub_tracker/feeds/view/partials/content/content_card.dart';

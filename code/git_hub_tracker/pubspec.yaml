@@ -52,6 +52,7 @@ flutter:
     - assets/images/actor_placeholder.jpg
     - assets/images/title.png
     - assets/images/UserProfile.png
+    - assets/icons/not-found-icon.png
 
 
   uses-material-design: true

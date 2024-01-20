@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:git_hub_tracker/core/constants/const.dart';
-import 'package:git_hub_tracker/core/logic/GitHubLibrary/github_api.dart';
+import 'package:git_hub_tracker/core/logic/github_api/github_api.dart';
+import 'package:git_hub_tracker/core/logic/utils.dart';
 import 'package:git_hub_tracker/core/view/partials/avatar.dart';
 import 'package:git_hub_tracker/core/view/partials/avatar_websource.dart';
 import 'package:git_hub_tracker/feeds/view/feed_end_drawer.dart';
@@ -8,7 +9,7 @@ import 'package:git_hub_tracker/feeds/view/partials/feed_card.dart';
 import 'package:git_hub_tracker/feeds/view/partials/waiting_feed_card.dart';
 
 class FeedPage extends StatefulWidget {
-  const FeedPage({Key? key}) : super(key: key);
+  const FeedPage({super.key});
 
   @override
   State<FeedPage> createState() => _FeedPageState();
@@ -23,22 +24,31 @@ class _FeedPageState extends State<FeedPage> {
   int index = 1;
   final List<FeedCard> _feedCards = [];
 
-
-
   @override
   void initState() {
     super.initState();
-    fetch();
+    firstFetch();
+  }
+
+  Future<void> firstFetch() async{
+      List<FeedCard> newData = await GitHubApiSingleTon.api.getFeed(kFeedRowNumber, index);
+      setState(() {
+        _feedCards.addAll(newData);
+        sortOnDate(_feedCards);
+      });
   }
 
   Future<void> fetch() async{
+    index++;
+    print('$index');
     List<FeedCard> newData = await GitHubApiSingleTon.api.getFeed(kFeedRowNumber, index);
-      setState(() {
-        index++;
-        _feedCards.removeLast();
-        _feedCards.addAll(newData);
-      });
+
+    setState(() {
+      _feedCards.addAll(newData);
+      sortOnDate(_feedCards);
+    });
   }
+
 
 
   @override
@@ -61,7 +71,7 @@ class _FeedPageState extends State<FeedPage> {
                   );
                 } else {
                   return IconButton(
-                    icon: const AvatarWebSource(imagePath: kErrorAvatarUrl),
+                    icon: const Avatar(imagePath: "assets/icons/not-found-icon.png"),
                     tooltip: 'UserList',
                     onPressed: _openEndDrawer,
                   );
@@ -69,6 +79,7 @@ class _FeedPageState extends State<FeedPage> {
               }),
         ],
       ),
+
       body: RefreshIndicator(
         key: _refreshIndicatorKey,
         onRefresh: _onRefresh,
@@ -81,19 +92,20 @@ class _FeedPageState extends State<FeedPage> {
           },
           child: ListView.builder(
               itemCount: _feedCards.length + 1,
-              itemBuilder: (BuildContext context, int index) {
+              itemBuilder: (BuildContext context, int index){
                 if(index < _feedCards.length){
                   return _feedCards[index];
                 }
                 else{
-                  _feedCards.add(WaitingFeedCard.Default());
+                  return WaitingFeedCard.Default();
                 }
               }
           ),
         ),
-
       ),
+
       endDrawer: const FeedPageEndDrawer(),
+      onEndDrawerChanged: onDrawerDispose,
     );
   }
 
@@ -104,6 +116,7 @@ class _FeedPageState extends State<FeedPage> {
       index = 1;
       _feedCards.clear();
       _feedCards.addAll(list);
+      sortOnDate(_feedCards);
     });
 
     return Future.delayed(
@@ -115,5 +128,11 @@ class _FeedPageState extends State<FeedPage> {
 
   void _openEndDrawer() {
     _scaffoldKey.currentState!.openEndDrawer();
+  }
+
+  onDrawerDispose(bool open) {
+    if(!open){
+      _onRefresh();
+    }
   }
 }

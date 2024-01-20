@@ -1,4 +1,4 @@
-import 'package:git_hub_tracker/core/logic/GitHubLibrary/model/event/payload/payloadModel/github_event_author.dart';
+import 'package:git_hub_tracker/core/model/github_library/event/payload/payload_subtypes/github_event_author.dart';
 
 class GitHubEventCommit {
     late String sha;
