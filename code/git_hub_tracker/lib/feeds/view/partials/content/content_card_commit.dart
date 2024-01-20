@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
+import 'package:git_hub_tracker/core/constants/const.dart';
 import 'package:git_hub_tracker/core/constants/styles/main_styles.dart';
 import 'package:git_hub_tracker/core/logic/github_api/github_api.dart';
 import 'package:git_hub_tracker/core/model/github_library/event/payload/payload_subtypes/github_event_commit.dart';
@@ -61,7 +62,7 @@ class _ContentCardCommitState extends State<ContentCardCommit> {
                         Row(
                           children: [
                             SmallAvatarWebSource(
-                              imagePath: commit.author_avatar,
+                              imagePath: commit.author_avatar ?? kErrorAvatarUrl,
                             ),
                             const VerticalDivider(color: Colors.white),
                             Text(DisplayDate(commit.date),
@@ -102,8 +103,19 @@ class _ContentCardCommitState extends State<ContentCardCommit> {
                 );
               }
               else{
-                return
-                  const Column(
+                if(future.hasError){
+                  return Column(
+                    children: [
+                      const Divider(height: 10, color: Colors.transparent),
+                      Center(
+                        child: Text('ERROR: ${future.error}'),
+                      ),
+                      const Divider(height: 10, color: Colors.transparent),
+                    ],
+                  );
+                }
+                else{
+                  return const Column(
                     children: [
                       Divider(height: 10, color: Colors.transparent),
                       Center(
@@ -119,17 +131,8 @@ class _ContentCardCommitState extends State<ContentCardCommit> {
                       Divider(height: 10, color: Colors.transparent),
                     ],
                   );
+                }
               }
-
-              return Container(
-                height: 70,
-                width: double.infinity,
-                decoration: kBoxDecorationInner,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 3,
-                  vertical: 3,
-                ),
-              );
             }),
       ]),
     );

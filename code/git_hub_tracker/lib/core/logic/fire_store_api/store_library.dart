@@ -10,7 +10,7 @@ Future<Stream<DocumentSnapshot<StoreUser>>?> initUserStore() async {
  //Check if user is init:
  var collection = FirebaseFirestore.instance.collection('users');
  if(collection.doc(userName).get() == null){
-   collection.doc(userName).set(const StoreUser(followed_users: [], followed_repository: []).toJson(), SetOptions(merge: true));
+   await resetCollectionUserData(collection, userName);
  }
 
 
@@ -31,10 +31,13 @@ Future<StoreUser> getUserStore() async {
   String userName = await GitHubApiSingleTon.api.getCurrentUserName();
 
   var collection = FirebaseFirestore.instance.collection('users');
-  if(collection.doc(userName).get() != null){
-    DocumentSnapshot<Map<String, dynamic>> snapshot = await collection.doc(userName).get();
-    userData = StoreUser.fromJson(snapshot.data()!);
+  if(collection.doc(userName).get() == null){
+    await resetCollectionUserData(collection, userName);
   }
+
+  DocumentSnapshot<Map<String, dynamic>> snapshot = await collection.doc(userName).get();
+  userData = StoreUser.fromJson(snapshot.data()!);
+
   return userData;
 }
 
@@ -49,4 +52,21 @@ updateUserStore(StoreUser user) async {
     await collection.doc(userName).set(user.toJson())
         .onError((error, stackTrace){print('ERROR: $stackTrace');});
   }
+}
+
+
+
+Future<void> resetCollectionUserData(CollectionReference<Map<String, dynamic>> collection, String userName) async {
+  List<String> repo = await GitHubApiSingleTon.api.getFollowedRepository();
+  List<String> user = await GitHubApiSingleTon.api.getFollowedUser();
+
+  collection.doc(userName).set(StoreUser(followed_users: user, followed_repository: repo).toJson(), SetOptions(merge: true));
+}
+
+
+Future<void> resyncTracker() async {
+  var collection = FirebaseFirestore.instance.collection('users');
+  String userName = await GitHubApiSingleTon.api.getCurrentUserName();
+  await resetCollectionUserData(collection, userName);
+  return Future.delayed(const Duration(milliseconds: 0));
 }

@@ -39,6 +39,16 @@ class GitHubApi {
   }
   //endregion
 
+  Map<String, String> getHeaders(){
+    return {
+      'Content-Type':'application/json',
+      'Accept':'application/vnd.github+json',
+      'X-GitHub-Api-Version':'2022-11-28',
+      'User-Agent':'GithubTracker',
+      'Authorization':'Bearer $_currentToken',
+    };
+  }
+
 
 
   ///Get All Feed to Populate feed-page
@@ -76,19 +86,8 @@ class GitHubApi {
   Future<String> getCurrentUserAvatar() async {
     User currentUser = await _github.users.getCurrentUser();
 
-    Map<String, String> queryParams = {};
-
-    Map<String, String> headers = {
-      'Content-Type':'application/json',
-      'Accept':'application/vnd.github+json',
-      'X-GitHub-Api-Version':'2022-11-28',
-      'User-Agent':'GithubTracker',
-      'Authorization':'Bearer $_currentToken',
-    };
-
-
-    var url = Uri.https('api.github.com','/users/${currentUser.login}', queryParams);
-    var response = await http.get(url, headers: headers);
+    var url = Uri.https('api.github.com','/users/${currentUser.login}');
+    var response = await http.get(url, headers: getHeaders());
     Map<String, dynamic> rootNode = await jsonDecode(response.body);
 
     return rootNode['avatar_url'] ?? kErrorAvatarUrl;
@@ -98,47 +97,23 @@ class GitHubApi {
 
   ///Get a repository data from a Repo Url using authentification
   Future<GitHubRepository> getCurrentRepository(String url) async{
-    Map<String, String> headers = {
-      'Content-Type':'application/json',
-      'Accept':'application/vnd.github+json',
-      'X-GitHub-Api-Version':'2022-11-28',
-      'User-Agent':'GithubTracker',
-      'Authorization':'Bearer $_currentToken',
-    };
-
     Uri repoUrl = Uri.parse(url);
-    var repoResponse = await http.get(repoUrl, headers: headers);
+    var repoResponse = await http.get(repoUrl, headers: getHeaders());
     return GitHubRepository(jsonDecode(repoResponse.body));
   }
 
 
   ///Get a commit data from a Repo Url using authentification
   Future<GitHubCommit> getCurrentCommit(String url) async{
-    Map<String, String> headers = {
-      'Content-Type':'application/json',
-      'Accept':'application/vnd.github+json',
-      'X-GitHub-Api-Version':'2022-11-28',
-      'User-Agent':'GithubTracker',
-      'Authorization':'Bearer $_currentToken',
-    };
-
     Uri repoUrl = Uri.parse(url);
-    var repoResponse = await http.get(repoUrl, headers: headers);
+    var repoResponse = await http.get(repoUrl, headers: getHeaders());
     return GitHubCommit(jsonDecode(repoResponse.body));
   }
 
   ///Get a commit data from a Repo Url using authentification
   Future<GitHubIssue> getCurrentIssue(String url) async{
-    Map<String, String> headers = {
-      'Content-Type':'application/json',
-      'Accept':'application/vnd.github+json',
-      'X-GitHub-Api-Version':'2022-11-28',
-      'User-Agent':'GithubTracker',
-      'Authorization':'Bearer $_currentToken',
-    };
-
     Uri repoUrl = Uri.parse(url);
-    var repoResponse = await http.get(repoUrl, headers: headers);
+    var repoResponse = await http.get(repoUrl, headers: getHeaders());
     return GitHubIssue(jsonDecode(repoResponse.body));
   }
 
@@ -146,16 +121,8 @@ class GitHubApi {
 
   ///Get a commit data from a Repo Url using authentification
   Future<GitHubIssueComment> getCurrentIssueComment(String url) async{
-    Map<String, String> headers = {
-      'Content-Type':'application/json',
-      'Accept':'application/vnd.github+json',
-      'X-GitHub-Api-Version':'2022-11-28',
-      'User-Agent':'GithubTracker',
-      'Authorization':'Bearer $_currentToken',
-    };
-
     Uri repoUrl = Uri.parse(url);
-    var repoResponse = await http.get(repoUrl, headers: headers);
+    var repoResponse = await http.get(repoUrl, headers: getHeaders());
     return GitHubIssueComment(jsonDecode(repoResponse.body));
   }
 
@@ -165,6 +132,37 @@ class GitHubApi {
   }
 
 
+  ///Get the currentUser followed user
+  Future<List<String>> getFollowedUser() async {
+    List<String> user = [];
+
+    var url = Uri.https('api.github.com','/user/following');
+    var response = await http.get(url, headers: getHeaders());
+
+    List<dynamic> rootNode = jsonDecode(response.body);
+
+    for(Map<String, dynamic> followed in rootNode){
+      user.add(followed['login']);
+    }
+    return user;
+  }
+
+
+  ///Get the currentUser followed Repository
+  Future<List<String>> getFollowedRepository() async {
+    List<String> repo = [];
+
+    var url = Uri.https('api.github.com','/user/starred');
+    var response = await http.get(url, headers: getHeaders());
+
+    List<dynamic> rootNode = jsonDecode(response.body);
+
+    for(Map<String, dynamic> followed in rootNode){
+      repo.add(followed['full_name']);
+    }
+
+    return repo;
+  }
 
 
 
@@ -183,34 +181,35 @@ class GitHubApi {
       'page':'$page',
     };
 
-    Map<String, String> headers = {
-      'Content-Type':'application/json',
-      'Accept':'application/vnd.github+json',
-      'X-GitHub-Api-Version':'2022-11-28',
-      'User-Agent':'GithubTracker',
-      'Authorization':'Bearer $_currentToken',
-    };
-
     var url = Uri.https('api.github.com','/users/$userLogin/events', queryParams);
-    var response = await http.get(url, headers: headers);
+    var response = await http.get(url, headers: getHeaders());
 
-    List<dynamic> rootNode = jsonDecode(response.body);
+    dynamic rootNode = jsonDecode(response.body);
 
-    //init Parrallel Task
-    for(var element in rootNode){
-      parallelTasks.add(instanceGoodCard(element));
-    }
-
-    List<FeedCard> result = await Future.wait(parallelTasks);
-
-    FeedCard defaultCard = FeedCard.Default();
-    for(FeedCard card in result){
-      if(card.publishDate != defaultCard.publishDate){
-        list.add(card);
+    if(rootNode is List<dynamic>){
+      //init Parrallel Task
+      for(var element in rootNode){
+        parallelTasks.add(instanceGoodCard(element));
       }
-    }
 
-    return list;
+      List<FeedCard> result = await Future.wait(parallelTasks);
+
+      FeedCard defaultCard = FeedCard.Default();
+      for(FeedCard card in result){
+        if(card.publishDate != defaultCard.publishDate){
+          list.add(card);
+        }
+      }
+
+      return list;
+    }
+    else{
+      rootNode as Map<String, dynamic>;
+      if (kDebugMode) {
+        print('ErrorMessage: ${rootNode['message']}');
+      }
+      return list;
+    }
   }
 
 

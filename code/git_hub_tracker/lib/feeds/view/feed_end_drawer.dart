@@ -45,8 +45,9 @@ class _FeedPageEndDrawerState extends State<FeedPageEndDrawer> {
                     currentUser = snapshot.data!.data();
                     return ListView(
                         children: [
-                          ReSyncButton(onTap: (){
-                            //TODO: Add the ability to ReSync followed repo etc...
+                          ReSyncButton(onTap: () async {
+                            await resyncTracker();
+                            setState(() {});
                           },),
                           TrackChip(
                             trackedList: currentUser.followed_users,
