@@ -44,7 +44,7 @@ L'autre triste nouvelle est que l'application Github officiel ne permet pas de t
 
 ## 💻|Mockup:
 
-![Image montrant les mockups.](https://media.discordapp.net/attachments/431911532675465241/1052160423023095828/ToUpload.png)
+![Image montrant les mockups.](./MockUp/Feed Page - Open Menu.png)
 
 ## ♻️|Etat d'Avancement
 
