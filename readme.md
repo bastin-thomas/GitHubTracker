@@ -44,7 +44,7 @@ L'autre triste nouvelle est que l'application Github officiel ne permet pas de t
 
 ## 💻|Mockup:
 
-![Image montrant les mockups.](./MockUp/Feed Page - Open Menu.png)
+![Image montrant les mockups.](./MockUp/Feed_Page_-_Open_Menu.png)
 
 ## ♻️|Etat d'Avancement
 
