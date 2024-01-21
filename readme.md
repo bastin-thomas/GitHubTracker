@@ -76,4 +76,4 @@ L'autre triste nouvelle est que l'application Github officiel ne permet pas de t
 
 ✅ Persistance des listes avec FireBase
 
-☐ Creation de la logique de Filtre du Feed
+✅ Creation de la logique de Filtre du Feed
