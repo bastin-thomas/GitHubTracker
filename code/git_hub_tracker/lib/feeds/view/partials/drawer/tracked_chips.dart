@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:git_hub_tracker/core/constants/styles/main_styles.dart';
-import 'package:git_hub_tracker/feeds/view/partials/inputs/my_simple_chips_input.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:simple_chips_input/simple_chips_input.dart';
+import 'package:git_hub_tracker/feeds/view/partials/others/my_simple_chips_input.dart';
 
 class TrackChip extends StatelessWidget {
   final String chipName;

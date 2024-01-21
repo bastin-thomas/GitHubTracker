@@ -16,16 +16,13 @@ class GitHubEventPayload {
   static const String ISSUE_COMMENT = 'IssueCommentEvent';
   static const String WATCH =         'WatchEvent';
   static const String CREATE =        'CreateEvent';
-
-
-
   static const String DELETE =        'DeleteEvent';
-
-  static const String REALESE =       'ReleaseEvent';
   static const String PUBLIC =        'PublicEvent';
-
-  static const String PULLREQUEST =   'PullRequestEvent';
   static const String FORK =          'ForkEvent';
 
+
+  //No Time To finished
+  static const String PULLREQUEST =   'PullRequestEvent';
+  static const String REALESE =       'ReleaseEvent';
   static const String MEMBER =        'MemberEvent';
 }

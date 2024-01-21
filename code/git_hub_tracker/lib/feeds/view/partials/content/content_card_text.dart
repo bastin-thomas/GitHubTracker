@@ -7,7 +7,10 @@ import 'package:markdown_viewer/markdown_viewer.dart';
 class ContentCardText extends ContentCard {
   final String text;
 
-  const ContentCardText({Key? key, required this.text}) : super(key: key);
+  const ContentCardText({super.key, required this.text});
+
+  @override
+  String toChips() => 'Text';
 
   @override
   Widget build(BuildContext context) {

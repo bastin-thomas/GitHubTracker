@@ -7,7 +7,10 @@ import 'package:git_hub_tracker/feeds/view/partials/content/content_card_commit.
 class ContentCardPush extends ContentCard {
   final GitHubEventPayloadPush payloadPush;
 
-  const ContentCardPush({Key? key, required this.payloadPush}) : super(key: key);
+  const ContentCardPush({super.key, required this.payloadPush});
+
+  @override
+  String toChips() => 'Push';
 
   @override
   Widget build(BuildContext context) {

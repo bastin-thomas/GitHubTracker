@@ -13,11 +13,13 @@ import 'package:markdown_viewer/markdown_viewer.dart';
 class ContentCardIssueComment extends ContentCard {
   final GitHubEventPayloadIssueComment eventIssueComment;
   final GitHubIssueComment issueComment;
-  const ContentCardIssueComment(this.issueComment, {Key? key, required this.eventIssueComment}) : super(key: key);
+  const ContentCardIssueComment(this.issueComment, {super.key, required this.eventIssueComment});
+
+  @override
+  String toChips() => 'Issue Comment';
 
   @override
   Widget build(BuildContext context) {
-
     return Align(
       alignment: Alignment.centerLeft,
       child: Wrap(

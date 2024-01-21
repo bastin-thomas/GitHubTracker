@@ -3,7 +3,11 @@ import 'package:git_hub_tracker/feeds/view/partials/content/content_card.dart';
 import 'package:git_hub_tracker/core/constants/styles/main_styles.dart';
 
 class ContentDefaultTEXT extends ContentCard {
-  const ContentDefaultTEXT({Key? key}) : super(key: key);
+  const ContentDefaultTEXT({super.key});
+
+  @override
+  String toChips() => 'DefaultText';
+
 
   @override
   Widget build(BuildContext context) {

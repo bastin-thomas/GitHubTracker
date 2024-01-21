@@ -86,6 +86,7 @@ class _FeedPageEndDrawerState extends State<FeedPageEndDrawer> {
 
   ///Get On Added
   onAdded(String value,) {
+    // ignore: unnecessary_null_comparison
     if(currentUser != null){
       print('TEST: ${currentUser.toJson()}');
       updateUserStore(currentUser);

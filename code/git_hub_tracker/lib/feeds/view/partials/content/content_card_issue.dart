@@ -15,11 +15,13 @@ class ContentCardIssue extends ContentCard {
   final GitHubEvent event;
   final GitHubIssue issue;
 
-  const ContentCardIssue({Key? key, required this.payload, required this.event, required this.issue,}) : super(key: key);
+  const ContentCardIssue({super.key, required this.payload, required this.event, required this.issue,});
+
+  @override
+  String toChips() => 'Issue';
 
   @override
   Widget build(BuildContext context) {
-
     return Align(
       alignment: Alignment.centerLeft,
       child: Wrap(

@@ -11,11 +11,16 @@ import 'package:markdown_viewer/markdown_viewer.dart';
 class ContentCardWatch extends ContentCard {
   final GitHubEventPayloadWatch payload;
   final GitHubEvent event;
-  const ContentCardWatch({Key? key, required this.payload, required this.event,}) : super(key: key);
+
+  const ContentCardWatch(
+      {super.key, required this.payload, required this.event,});
+
+
+  @override
+  String toChips() => 'Starred';
 
   @override
   Widget build(BuildContext context) {
-
     return Align(
       alignment: Alignment.centerLeft,
       child: Wrap(
@@ -54,7 +59,8 @@ class ContentCardWatch extends ContentCard {
                               fontSize: 14),
                         ),
                       ),
-                      const VerticalDivider(width: 3, color: Colors.transparent,),
+                      const VerticalDivider(
+                        width: 3, color: Colors.transparent,),
                       AvatarWebSource(imagePath: event.actor.avatar_url),
                     ],
                   ),

@@ -3,145 +3,18 @@ import 'package:flutter_emoji/flutter_emoji.dart';
 import 'package:git_hub_tracker/Core/View/partials/avatar_websource.dart';
 import 'package:git_hub_tracker/core/constants/styles/main_styles.dart';
 import 'package:git_hub_tracker/core/model/github_library/event/github_event.dart';
-import 'package:git_hub_tracker/core/model/github_library/event/payload/github_event_payload_create.dart';
+import 'package:git_hub_tracker/core/model/github_library/event/payload/github_event_payload_delete.dart';
 import 'package:git_hub_tracker/core/model/github_library/github_repository.dart';
 import 'package:git_hub_tracker/core/view/partials/link_launcher.dart';
 import 'package:git_hub_tracker/feeds/view/partials/content/content_card.dart';
 import 'package:markdown_viewer/markdown_viewer.dart';
 
-//static const BRANCH = 'branch';
-
-class ContentCardCreate extends ContentCard {
-  final GitHubEventPayloadCreate payload;
-  final GitHubRepository repository;
-  final GitHubEvent event;
-  final String message;
-
-  const ContentCardCreate({
-    Key? key,
-    required this.payload,
-    required this.event,
-    required this.repository,
-    required this.message,
-  }) : super(key: key);
-
-  @override
-  String toChips() => 'Create';
-
-  @override
-  Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: Wrap(
-        alignment: WrapAlignment.start,
-        children: [
-          const Divider(height: 4, color: Colors.transparent),
-          Container(
-            width: double.infinity,
-            decoration: kBoxDecorationInner,
-            padding: const EdgeInsets.symmetric(
-              horizontal: 10,
-              vertical: 10,
-            ),
-            child: Wrap(
-              children: [
-                const VerticalDivider(
-                  width: 3,
-                  color: Colors.transparent,
-                ),
-                Row(
-                  children: [
-                    const VerticalDivider(
-                      width: 10,
-                      color: Colors.transparent,
-                    ),
-                    MarkdownViewer(
-                      EmojiParser().emojify(message),
-                      styleSheet: const MarkdownStyle(
-                        textStyle: kDefaultPayloadTextStyle,
-                      ),
-                    ),
-                    const VerticalDivider(
-                      width: 5,
-                      color: Colors.transparent,
-                    ),
-                    LinkLauncher(
-                      url: Uri.parse('https://github.com/${event.actor.login}'),
-                      child: Row(
-                        children: [
-                          MarkdownViewer(
-                            EmojiParser()
-                                .emojify(' ${event.actor.display_login}'),
-                            styleSheet: const MarkdownStyle(
-                              textStyle: kBoldPayloadTextStyle,
-                            ),
-                          ),
-                          const VerticalDivider(
-                            width: 3,
-                            color: Colors.transparent,
-                          ),
-                          AvatarWebSource(imagePath: event.actor.avatar_url),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                const Divider(
-                  height: 15,
-                  color: Colors.transparent,
-                ),
-                Container(
-                  width: double.infinity,
-                  decoration: kBoxDecorationInner,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 10,
-                  ),
-                  child: Wrap(
-                    children: [
-                      MarkdownViewer(
-                        EmojiParser().emojify('Description: '),
-                        styleSheet: const MarkdownStyle(
-                            textStyle: kBoldPayloadTextStyle),
-                      ),
-                      MarkdownViewer(
-                        EmojiParser().emojify(payload.description),
-                        styleSheet: const MarkdownStyle(
-                            textStyle: kDefaultPayloadTextStyle),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const Divider(height: 4, color: Colors.transparent),
-        ],
-      ),
-    );
-  }
-}
-/*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-* */
-class ContentCardCreateTag extends ContentCard {
-  final GitHubEventPayloadCreate payload;
+class ContentCardDeleteTag extends ContentCard {
+  final GitHubEventPayloadDelete payload;
   final GitHubRepository repository;
   final GitHubEvent event;
 
-  const ContentCardCreateTag({
+  const ContentCardDeleteTag({
     super.key,
     required this.payload,
     required this.event,
@@ -149,8 +22,7 @@ class ContentCardCreateTag extends ContentCard {
   });
 
   @override
-  String toChips() => 'Create';
-
+  String toChips() => 'Delete';
 
   @override
   Widget build(BuildContext context) {
@@ -236,10 +108,10 @@ class ContentCardCreateTag extends ContentCard {
 
                         MarkdownViewer(
                           EmojiParser()
-                              .emojify(' created '),
+                              .emojify(' deleted '),
                           styleSheet: const MarkdownStyle(
                             textStyle: TextStyle(
-                              color: Colors.green,
+                              color: Colors.redAccent,
                               fontWeight: FontWeight.bold,
                               fontSize: 14,
                             ),
@@ -252,11 +124,12 @@ class ContentCardCreateTag extends ContentCard {
                         ),
 
                         MarkdownViewer(
-                          EmojiParser().emojify(' by '),
+                          EmojiParser().emojify(' by'),
                           styleSheet: const MarkdownStyle(
                             textStyle: kDefaultPayloadTextStyle,
                           ),
                         ),
+
 
                         const VerticalDivider(
                           width: 5,
@@ -300,20 +173,20 @@ class ContentCardCreateTag extends ContentCard {
 *
 *
 * */
-class ContentCardCreateBranch extends ContentCard {
-  final GitHubEventPayloadCreate payload;
+class ContentCardDeleteBranch extends ContentCard {
+  final GitHubEventPayloadDelete payload;
   final GitHubRepository repository;
   final GitHubEvent event;
 
-  const ContentCardCreateBranch({
-    Key? key,
+  @override
+  String toChips() => 'Delete';
+
+  const ContentCardDeleteBranch({
+    super.key,
     required this.payload,
     required this.event,
     required this.repository,
-  }) : super(key: key);
-
-  @override
-  String toChips() => 'Create';
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -337,7 +210,8 @@ class ContentCardCreateBranch extends ContentCard {
                   color: Colors.transparent,
                 ),
                 MarkdownViewer(
-                  EmojiParser().emojify('${payload.ref} have been '),
+                  EmojiParser()
+                      .emojify('${payload.ref} branch have been '),
                   styleSheet: const MarkdownStyle(
                     textStyle: kDefaultPayloadTextStyle,
                   ),
@@ -350,10 +224,10 @@ class ContentCardCreateBranch extends ContentCard {
 
                 MarkdownViewer(
                   EmojiParser()
-                      .emojify(' created '),
+                      .emojify(' deleted '),
                   styleSheet: const MarkdownStyle(
                     textStyle: TextStyle(
-                      color: Colors.green,
+                      color: Colors.redAccent,
                       fontWeight: FontWeight.bold,
                       fontSize: 14,
                     ),
@@ -366,11 +240,19 @@ class ContentCardCreateBranch extends ContentCard {
                 ),
 
                 MarkdownViewer(
-                  EmojiParser().emojify(' by '),
+                  EmojiParser()
+                      .emojify(' by '),
                   styleSheet: const MarkdownStyle(
                     textStyle: kDefaultPayloadTextStyle,
                   ),
                 ),
+
+                const VerticalDivider(
+                  width: 3,
+                  color: Colors.transparent,
+                ),
+
+
                 Row(
                   children: [
                     const VerticalDivider(

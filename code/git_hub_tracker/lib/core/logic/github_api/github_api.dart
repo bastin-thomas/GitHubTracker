@@ -1,7 +1,6 @@
 
 import 'dart:async';
 import 'dart:convert';
-import 'dart:isolate';
 
 import 'package:git_hub_tracker/core/constants/const.dart';
 import 'package:git_hub_tracker/core/logic/fire_store_api/store_library.dart';
@@ -9,8 +8,11 @@ import 'package:git_hub_tracker/core/model/fire_store_dto_library/store_user.dar
 import 'package:git_hub_tracker/core/model/github_library/event/github_event.dart';
 import 'package:git_hub_tracker/core/model/github_library/event/payload/github_event_payload.dart';
 import 'package:git_hub_tracker/core/model/github_library/event/payload/github_event_payload_create.dart';
+import 'package:git_hub_tracker/core/model/github_library/event/payload/github_event_payload_delete.dart';
+import 'package:git_hub_tracker/core/model/github_library/event/payload/github_event_payload_fork.dart';
 import 'package:git_hub_tracker/core/model/github_library/event/payload/github_event_payload_issue.dart';
 import 'package:git_hub_tracker/core/model/github_library/event/payload/github_event_payload_issuecomment.dart';
+import 'package:git_hub_tracker/core/model/github_library/event/payload/github_event_payload_public.dart';
 import 'package:git_hub_tracker/core/model/github_library/event/payload/github_event_payload_push.dart';
 import 'package:git_hub_tracker/core/model/github_library/event/payload/github_event_payload_watch.dart';
 import 'package:git_hub_tracker/core/model/github_library/github_commit.dart';
@@ -18,8 +20,11 @@ import 'package:git_hub_tracker/core/model/github_library/github_issue.dart';
 import 'package:git_hub_tracker/core/model/github_library/github_issue_comment.dart';
 import 'package:git_hub_tracker/core/model/github_library/github_repository.dart';
 import 'package:git_hub_tracker/feeds/view/partials/content/content_card_create.dart';
+import 'package:git_hub_tracker/feeds/view/partials/content/content_card_delete.dart';
+import 'package:git_hub_tracker/feeds/view/partials/content/content_card_fork.dart';
 import 'package:git_hub_tracker/feeds/view/partials/content/content_card_issue.dart';
 import 'package:git_hub_tracker/feeds/view/partials/content/content_card_issuecomment.dart';
+import 'package:git_hub_tracker/feeds/view/partials/content/content_card_public.dart';
 import 'package:git_hub_tracker/feeds/view/partials/content/content_card_push.dart';
 import 'package:git_hub_tracker/feeds/view/partials/content/content_card_watch.dart';
 import 'package:git_hub_tracker/feeds/view/partials/feed_card.dart';
@@ -274,38 +279,103 @@ class GitHubApi {
         final GitHubEventPayloadCreate payload = event.payload as GitHubEventPayloadCreate;
         GitHubRepository gitHubRepository = await getCurrentRepository(event.repo.url);
 
-        return FeedCard(
-          publishDate:  event.created_at,
-          image: gitHubRepository.owner.avatarUrl,
-          title: '${gitHubRepository.name} [${event.public == true ? 'Public' : 'Private'}]',
-          contentCard: ContentCardCreate(payload:payload, event: event, repository: gitHubRepository, message: ':file_folder: have been created by',),
-          uri: Uri.parse(gitHubRepository.html_url),
-          subtitle: 'New Repository Created :file_folder:',
-        );
+        switch(payload.ref_type){
+          case GitHubEventPayloadCreate.BRANCH:
+            return FeedCard(
+              publishDate:  event.created_at,
+              image: gitHubRepository.owner.avatarUrl,
+              title: '${gitHubRepository.name} [${event.public == true ? 'Public' : 'Private'}]',
+              contentCard: ContentCardCreateBranch(payload:payload, event: event, repository: gitHubRepository,),
+              uri: Uri.parse(gitHubRepository.html_url),
+              subtitle: 'New Branch Created :deciduous_tree:',
+            );
 
-      case GitHubEventPayloadCreate.BRANCH:
-        final GitHubEventPayloadCreate payload = event.payload as GitHubEventPayloadCreate;
+
+          case GitHubEventPayloadCreate.TAG:
+            return FeedCard(
+              publishDate:  event.created_at,
+              image: gitHubRepository.owner.avatarUrl,
+              title: '${gitHubRepository.name} [${event.public == true ? 'Public' : 'Private'}]',
+              contentCard: ContentCardCreateTag(payload:payload, event: event, repository: gitHubRepository,),
+              uri: Uri.parse(gitHubRepository.html_url),
+              subtitle: 'New Tag Created :label:',
+            );
+
+
+          default:
+            return FeedCard(
+              publishDate:  event.created_at,
+              image: gitHubRepository.owner.avatarUrl,
+              title: '${gitHubRepository.name} [${event.public == true ? 'Public' : 'Private'}]',
+              contentCard: ContentCardCreate(payload:payload, event: event, repository: gitHubRepository, message: ':file_folder: have been created by',),
+              uri: Uri.parse(gitHubRepository.html_url),
+              subtitle: 'New Repository Created :file_folder:',
+            );
+        }
+
+
+      case GitHubEventPayload.DELETE:
+        final GitHubEventPayloadDelete payload = event.payload as GitHubEventPayloadDelete;
+        GitHubRepository gitHubRepository = await getCurrentRepository(event.repo.url);
+
+        switch(payload.ref_type){
+          case GitHubEventPayloadDelete.BRANCH:
+            return FeedCard(
+              publishDate:  event.created_at,
+              image: gitHubRepository.owner.avatarUrl,
+              title: '${gitHubRepository.name} [${event.public == true ? 'Public' : 'Private'}]',
+              contentCard: ContentCardDeleteBranch(payload:payload, event: event, repository: gitHubRepository,),
+              uri: Uri.parse(gitHubRepository.html_url),
+              subtitle: 'Branch Deleted :deciduous_tree:',
+            );
+
+
+          case GitHubEventPayloadDelete.TAG:
+            return FeedCard(
+              publishDate:  event.created_at,
+              image: gitHubRepository.owner.avatarUrl,
+              title: '${gitHubRepository.name} [${event.public == true ? 'Public' : 'Private'}]',
+              contentCard: ContentCardDeleteTag(payload:payload, event: event, repository: gitHubRepository,),
+              uri: Uri.parse(gitHubRepository.html_url),
+              subtitle: 'Tag Deleted :label:',
+            );
+          default:
+            return FeedCard(
+              publishDate:  event.created_at,
+              image: gitHubRepository.owner.avatarUrl,
+              title: '${gitHubRepository.name} [${event.public == true ? 'Public' : 'Private'}]',
+              contentCard: ContentCardDeleteTag(payload:payload, event: event, repository: gitHubRepository,),
+              uri: Uri.parse(gitHubRepository.html_url),
+              subtitle: 'Tag Deleted :label:',
+            );
+        }
+
+
+      case GitHubEventPayload.PUBLIC:
+        final GitHubEventPayloadPublic payload = event.payload as GitHubEventPayloadPublic;
         GitHubRepository gitHubRepository = await getCurrentRepository(event.repo.url);
 
         return FeedCard(
           publishDate:  event.created_at,
           image: gitHubRepository.owner.avatarUrl,
           title: '${gitHubRepository.name} [${event.public == true ? 'Public' : 'Private'}]',
-          contentCard: ContentCardCreateBranch(payload:payload, event: event, repository: gitHubRepository,),
+          contentCard: ContentCardPublic(payload:payload, event: event, repository: gitHubRepository,),
           uri: Uri.parse(gitHubRepository.html_url),
-          subtitle: 'New Branch Created :deciduous_tree:',
+          subtitle: 'made Public :globe_with_meridians:',
         );
 
-      case GitHubEventPayloadCreate.TAG:
-        final GitHubEventPayloadCreate payload = event.payload as GitHubEventPayloadCreate;
+
+      case GitHubEventPayload.FORK:
+        final GitHubEventPayloadFork payload = event.payload as GitHubEventPayloadFork;
         GitHubRepository gitHubRepository = await getCurrentRepository(event.repo.url);
+
         return FeedCard(
           publishDate:  event.created_at,
           image: gitHubRepository.owner.avatarUrl,
           title: '${gitHubRepository.name} [${event.public == true ? 'Public' : 'Private'}]',
-          contentCard: ContentCardCreateTag(payload:payload, event: event, repository: gitHubRepository,),
+          contentCard: ContentCardFork(payload:payload, event: event, repository: gitHubRepository,),
           uri: Uri.parse(gitHubRepository.html_url),
-          subtitle: 'New Tag Created :label:',
+          subtitle: 'fork created :trident:',
         );
 
       default:
