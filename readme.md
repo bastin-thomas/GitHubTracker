@@ -70,10 +70,10 @@ L'autre triste nouvelle est que l'application Github officiel ne permet pas de t
 
 ✅ Creation de l'API d'utilisation pour GitHub (récupération du feed, et autres appels en tout genre).
 
-☐ Ajout de la liste des personnes a traqué
+✅ Ajout de la liste des personnes a traqué
 
-☐ Ajout de la liste des repository a traqué
+✅ Ajout de la liste des repository a traqué
 
-☐ Persistance des listes avec FireBase
+✅ Persistance des listes avec FireBase
 
 ☐ Creation de la logique de Filtre du Feed
