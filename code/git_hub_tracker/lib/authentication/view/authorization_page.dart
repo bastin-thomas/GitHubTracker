@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:git_hub_tracker/Core/constants/secret_consts.dart';
+import 'package:git_hub_tracker/core/constants/secret_consts.dart';
 import 'package:git_hub_tracker/authentication/logic/github_authenticator.dart';
 import 'package:git_hub_tracker/authentication/logic/github_oauth_http_client.dart';
 import 'package:git_hub_tracker/core/logic/routing/routes.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
-import 'package:git_hub_tracker/Core/constants/secret_consts.dart';
 import 'package:git_hub_tracker/core/logic/utils/string_to_base64.dart';
+import 'package:git_hub_tracker/core/constants/secret_consts.dart';
 import 'package:oauth2/oauth2.dart';
 import 'package:dio/dio.dart';
 

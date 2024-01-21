@@ -127,14 +127,14 @@ class _FeedPageState extends State<FeedPage> {
                   return false;
                 },
                 child: ListView.builder(
-                    itemCount: _filteredFeedCards.length + 1,
+                    itemCount: _filteredFeedCards.length+2,
                     itemBuilder: (BuildContext context, int index){
                       if(index == 0){
                         return filterHandler();
                       }
 
-                      if(index < _filteredFeedCards.length){
-                        return _filteredFeedCards[index];
+                      if(index < _filteredFeedCards.length+1){
+                        return _filteredFeedCards[index-1];
                       }
                       else{
                         return _noMoreDataToFetch == true ? EndFeedCard.Default(): WaitingFeedCard.Default();
@@ -169,6 +169,7 @@ class _FeedPageState extends State<FeedPage> {
     }
 
     setState(() {
+      _filterString;
       _filteredFeedCards = filterFeedCards(_feedCards);
     });
   }
@@ -176,17 +177,16 @@ class _FeedPageState extends State<FeedPage> {
   ///FilterFeedCardRuler
   List<FeedCard> filterFeedCards(List<FeedCard> allItems) {
     List<String> filters = _filterString.split(";");
+    filters.removeLast();
+
     return allItems.where((item) {
-      if(_filterString == ''){
-        return true;
-      }
+      if(_filterString == '') return true;
 
       for(String filter in filters){
         if(filter == item.contentCard.toChips()){
           return true;
         }
       }
-
       return false;
     }).toList();
   }
@@ -194,33 +194,24 @@ class _FeedPageState extends State<FeedPage> {
 
   ///Initialise the FilterHandler & sync with FireStore
   Widget filterHandler() {
-    return FutureBuilder<Stream<DocumentSnapshot<StoreUser>>?>(
-        future: initUserStore(),
+    return FutureBuilder<StoreUser>(
+        future: getUserStore(),
         builder: (context, future) {
           if (!future.hasData || future.hasError) {
             return waitingFilter();
           } else {
-            _userStream = future.data!;
-            return StreamBuilder<DocumentSnapshot<StoreUser>>(
-                stream: future.data!,
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting || snapshot.hasError) {
-                    return waitingFilter();
-                  }
-                  _currentUser = snapshot.data!.data();
-                  _filterState = _currentUser!.filter_state;
-                  return ChipsetFilter(
-                    onChipChanged: (String chipsSelected, int Index) {
-                      _filterString = chipsSelected;
-                    },
+            _currentUser = future.data!;
+            _filterState = _currentUser!.filter_state;
+            return ChipsetFilter(
+              onChipChanged: (String chipsSelected, int Index) {
+                _filterString = chipsSelected;
+              },
 
-                    onTap: () {
-                      updateFilter();
-                    },
+              onTap: () {
+                updateFilter();
+              },
 
-                    Selected: _filterState,
-                  );
-                }
+              Selected: _filterState,
             );
           }
         }

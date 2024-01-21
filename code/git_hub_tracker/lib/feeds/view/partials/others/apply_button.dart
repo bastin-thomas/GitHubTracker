@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:git_hub_tracker/core/constants/styles/main_styles.dart';
 
-class FilterButton extends StatelessWidget {
+class ApplyButton extends StatelessWidget {
   final VoidCallback? onTap;
 
-  const FilterButton({super.key, required this.onTap});
+  const ApplyButton({super.key, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     bool disable = false;
     return Container(
-      padding: const EdgeInsets.fromLTRB(10, 5, 10, 10),
+      padding: const EdgeInsets.fromLTRB(10, 10, 10, 5),
       alignment: Alignment.centerLeft,
       child: GestureDetector(
         onTap: (){
