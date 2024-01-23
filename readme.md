@@ -44,7 +44,7 @@ L'autre triste nouvelle est que l'application Github officiel ne permet pas de t
 
 ## 💻|Mockup:
 
-![Image montrant les mockups.](./MockUp/FeedPage-OpenMenu.png)
+![Image montrant les mockups.](./MockUp/MockupAll.png)
 
 ## ♻️|Etat d'Avancement
 
@@ -77,3 +77,12 @@ L'autre triste nouvelle est que l'application Github officiel ne permet pas de t
 ✅ Persistance des listes avec FireBase
 
 ✅ Creation de la logique de Filtre du Feed
+
+## 🎥 | Demo:
+
+
+## 📦 | Project Installation:
+[Install Flutter and Dart SDK](https://docs.flutter.dev/get-started/install/windows/mobile?tab=download#install-the-flutter-sdk)
+Open ./code/git_hub_tracker/ as Flutter Project in Inteliji/AndroidStudio
+Click on Run() when a phone is configured ⚠️it's an Android/IOS app, do not execute it on Web or other environment.
+
