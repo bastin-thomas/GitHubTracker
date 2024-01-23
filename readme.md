@@ -6,7 +6,7 @@ You can also track a specific repository to have all news about it.
 ## 🗂️|Répartition des Dossiers du Repository
 - **Documentation** : Rassemble toutes les informations relatives a la documentation utilisé pour le projet (consigne, lien vers d'autres documentations...).
 - **Mockup**: Rassemble tout ce qui est en rapport avec les différentes maquettes de l'applications.
-- **Source**: Je vous laisse devinez...
+- **Source**: Je vous laisse devinez... La librairie flutter sera divisée en 'Module', authentication, core, feeds, qui suivront chacun un semblant de MVC.
 
 ## 📜|Description de l'Application
 N'avez vous jamais été curieux d'en connaître un peux plus sur votre activité github ? Ou celle d'un Repository ? voir même d'un autre utilisateur ? Le tout depuis votre smartphone, sur un feed communs ? Si c'est votre cas, alors cette application est faite pour vous.
