@@ -28,8 +28,8 @@ Future<Stream<DocumentSnapshot<StoreUser>>?> initUserStore() async {
  return userStoreStream;
 }
 
-Future<StoreUser> getUserStore() async {
-  StoreUser userData = StoreUser(followed_users: [], followed_repository: [], filter_state: []);
+Future<StoreUser> getStoreUser() async {
+  StoreUser userData = const StoreUser(followed_users: [], followed_repository: [], filter_state: []);
   String userName = await GitHubApiSingleTon.api.getCurrentUserName();
 
   var collection = FirebaseFirestore.instance.collection('users');

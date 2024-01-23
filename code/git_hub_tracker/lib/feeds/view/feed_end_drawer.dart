@@ -15,7 +15,6 @@ class FeedPageEndDrawer extends StatefulWidget {
 }
 
 class _FeedPageEndDrawerState extends State<FeedPageEndDrawer> {
-  late Stream<DocumentSnapshot<StoreUser>>? _userStream;
   List<String> trackedUser = [];
   List<String> trackedRepositories = [];
   late StoreUser currentUser;
@@ -26,45 +25,35 @@ class _FeedPageEndDrawerState extends State<FeedPageEndDrawer> {
       child: Container(
         margin: const EdgeInsets.fromLTRB(0, 0, 0, 5),
         padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
-        child: FutureBuilder<Stream<DocumentSnapshot<StoreUser>>?>(
-          future: initUserStore(),
+        child: FutureBuilder<StoreUser>(
+          future: getStoreUser(),
           builder: (context, future) {
             if (!future.hasData || future.hasError) {
               return const WaitingUserData();
             } else {
 
-              _userStream = future.data!;
-              print('$_userStream');
+              currentUser = future.data!;
 
-              return StreamBuilder<DocumentSnapshot<StoreUser>>(
-                  stream: future.data!,
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting || snapshot.hasError) {
-                      return const WaitingUserData();
-                    }
-                    currentUser = snapshot.data!.data();
-                    return ListView(
-                        children: [
-                          ReSyncButton(onTap: () async {
-                            await resyncTracker();
-                            setState(() {});
-                          },),
-                          TrackChip(
-                            trackedList: currentUser.followed_users,
-                            chipName: kUserTraquedTitle,
-                            onDelete: onDelete,
-                            onAdded: onAdded,
-                          ),
-                          TrackChip(
-                            trackedList: currentUser.followed_repository,
-                            chipName: kRepositoriesTraquedTitle,
-                            onDelete: onDelete,
-                            onAdded: onAdded,
-                          ),
-                          const LogoutButton(),
-                        ],
-                      );
-                  }
+              return ListView(
+                children: [
+                  ReSyncButton(onTap: () async {
+                    await resyncTracker();
+                    setState(() {});
+                  },),
+                  TrackChip(
+                    trackedList: currentUser.followed_users,
+                    chipName: kUserTraquedTitle,
+                    onDelete: onDelete,
+                    onAdded: onAdded,
+                  ),
+                  TrackChip(
+                    trackedList: currentUser.followed_repository,
+                    chipName: kRepositoriesTraquedTitle,
+                    onDelete: onDelete,
+                    onAdded: onAdded,
+                  ),
+                  const LogoutButton(),
+                ],
               );
             }
           },

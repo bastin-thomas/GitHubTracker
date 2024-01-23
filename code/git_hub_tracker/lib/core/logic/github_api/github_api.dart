@@ -63,7 +63,7 @@ class GitHubApi {
 
       //getUserName and User TrackedList Name
       User currentUser = await _github.users.getCurrentUser();
-      StoreUser userStore = await getUserStore();
+      StoreUser userStore = await getStoreUser();
 
       //Prepare the whole code to be executed in parrallel
       //getCurrentUser

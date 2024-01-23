@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:git_hub_tracker/core/constants/const.dart';
+import 'package:git_hub_tracker/core/constants/styles/main_styles.dart';
 import 'package:git_hub_tracker/core/logic/fire_store_api/store_library.dart';
 import 'package:git_hub_tracker/core/logic/github_api/github_api.dart';
 import 'package:git_hub_tracker/core/logic/utils.dart';
@@ -195,7 +196,7 @@ class _FeedPageState extends State<FeedPage> {
   ///Initialise the FilterHandler & sync with FireStore
   Widget filterHandler() {
     return FutureBuilder<StoreUser>(
-        future: getUserStore(),
+        future: getStoreUser(),
         builder: (context, future) {
           if (!future.hasData || future.hasError) {
             return waitingFilter();
@@ -219,7 +220,7 @@ class _FeedPageState extends State<FeedPage> {
   }
 
   Widget waitingFilter() {
-    return ChipsetFilter(Selected: _filterState,);
+    return const WaitingFilter();
   }
 }
 
