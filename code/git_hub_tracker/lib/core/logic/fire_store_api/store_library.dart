@@ -56,6 +56,20 @@ updateUserStore(StoreUser user) async {
   }
 }
 
+updateFilterInUserStore(List<int> filter) async {
+  String userName = await GitHubApiSingleTon.api.getCurrentUserName();
+  var user = await getUserStore();
+
+  user.filter_state.clear();
+  user.filter_state.addAll(filter);
+
+  var collection = FirebaseFirestore.instance.collection('users');
+  if(collection.doc(userName).get() != null){
+    await collection.doc(userName).set(user.toJson())
+        .onError((error, stackTrace){print('ERROR: $stackTrace');});
+  }
+}
+
 
 
 Future<void> resetCollectionUserData(CollectionReference<Map<String, dynamic>> collection, String userName) async {

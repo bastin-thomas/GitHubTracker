@@ -159,17 +159,14 @@ class _FeedPageState extends State<FeedPage> {
   }
 
   ///Update Widget State & FireStore State
-  updateFilter(){
+  updateFilter() async {
     if(_currentUser != null){
-      updateUserStore(StoreUser(
-          followed_users: _currentUser!.followed_users,
-          followed_repository: _currentUser!.followed_repository,
-          filter_state: _filterState)
-      );
+      await updateFilterInUserStore(_filterState);
     }
 
     setState(() {
       _filterString;
+      _filterState;
       _filteredFeedCards = filterFeedCards(_feedCards);
     });
   }
