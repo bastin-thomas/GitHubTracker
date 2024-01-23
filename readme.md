@@ -3,6 +3,12 @@
 This Tracker is of course a way to track your activity on GitHub, and also activity of wanted user.
 You can also track a specific repository to have all news about it.
 
+## 📦 | Project Installation:
+[Install Flutter and Dart SDK](https://docs.flutter.dev/get-started/install/windows/mobile?tab=download#install-the-flutter-sdk)
+Open ./code/git_hub_tracker/ as Flutter Project in Inteliji/AndroidStudio
+Click on Run() when a phone is configured ⚠️it's an Android/IOS app, do not execute it on Web or other environment.
+
+
 ## 🗂️|Répartition des Dossiers du Repository
 - **Documentation** : Rassemble toutes les informations relatives a la documentation utilisé pour le projet (consigne, lien vers d'autres documentations...).
 - **Mockup**: Rassemble tout ce qui est en rapport avec les différentes maquettes de l'applications.
@@ -28,7 +34,6 @@ Bien entendus GitHub lui même propose déjà quelques choses de similaire sur s
 L'autre triste nouvelle est que l'application Github officiel ne permet pas de traqué des activités sur un seul feed principal. Il existe une fonctionnalité "Explore" Censé vous présenter de nouveau repository, mais nous sommes loin d'un équivalent a notre application.
 
 
-
 ## ✨|Fonctionnalitée:
 - *En tant qu'utilisateur* *je veux* pouvoir me connecter en utilisant la connexion GitHub *afin d'utiliser* l'application et si c'est la première fois, importer mes starred repository ainsi que mes abonnements a d'autres utilisateurs.
 
@@ -45,6 +50,24 @@ L'autre triste nouvelle est que l'application Github officiel ne permet pas de t
 ## 💻|Mockup:
 
 ![Image montrant les mockups.](./MockUp/MockupAll.png)
+
+
+## 🎥 | Demo:
+### Login Flow
+![Install Flutter and Dart SDK](./Gifs/Login.gif)
+
+### Auth Token saved in local Storage (SecureStorage)
+![Install Flutter and Dart SDK](./Gifs/TokenPersistence.gif)
+
+### Gestion des Utilisateurs Tracké
+![Install Flutter and Dart SDK](./Gifs/TrackedUserManagement&Display.gif)
+
+### Filtre et Affichage du Feed
+![Install Flutter and Dart SDK](./Gifs/Filters&DisplayFeed.gif)
+
+### Redirection Web lorsque c'est pertinent
+![Install Flutter and Dart SDK](./Gifs/ClickRepo.gif)
+
 
 ## ♻️|Etat d'Avancement
 
@@ -77,12 +100,3 @@ L'autre triste nouvelle est que l'application Github officiel ne permet pas de t
 ✅ Persistance des listes avec FireBase
 
 ✅ Creation de la logique de Filtre du Feed
-
-## 🎥 | Demo:
-
-
-## 📦 | Project Installation:
-[Install Flutter and Dart SDK](https://docs.flutter.dev/get-started/install/windows/mobile?tab=download#install-the-flutter-sdk)
-Open ./code/git_hub_tracker/ as Flutter Project in Inteliji/AndroidStudio
-Click on Run() when a phone is configured ⚠️it's an Android/IOS app, do not execute it on Web or other environment.
-
