@@ -9,47 +9,41 @@ Open ./code/git_hub_tracker/ as Flutter Project in Inteliji/AndroidStudio
 Click on Run() when a phone is configured ⚠️it's an Android/IOS app, do not execute it on Web or other environment.
 
 
-## 🗂️|Répartition des Dossiers du Repository
-- **Documentation** : Rassemble toutes les informations relatives a la documentation utilisé pour le projet (consigne, lien vers d'autres documentations...).
-- **Mockup**: Rassemble tout ce qui est en rapport avec les différentes maquettes de l'applications.
-- **Source**: Je vous laisse devinez... La librairie flutter sera divisée en 'Module', authentication, core, feeds, qui suivront chacun un semblant de MVC.
+## 🗂️|Folders in the Repository
+- **Documentation** : Gathers all informations based on documentation used for this project (rules, link to other docs...).
+- **Mockup**: Gathers all Application's Mockup.
+- **Source**: Guess... It contain all the App's source code. The Flutter Library is divided in 'Module', authentication, core, feeds page. That follow a sort of MVC.
 
-## 📜|Description de l'Application
-N'avez vous jamais été curieux d'en connaître un peux plus sur votre activité github ? Ou celle d'un Repository ? voir même d'un autre utilisateur ? Le tout depuis votre smartphone, sur un feed communs ? Si c'est votre cas, alors cette application est faite pour vous.
+## 📜| Application Description
+Have you never been curious to know a little more of your Github Activity ? Or a specific Repository Activity ? Or maybe even from other users ? All from your smartphone, with one common feed ? If it's the case, so this application is made for you.
 
-**Premièrement**, l'application aura comme fonctionnalité le fait de **traqué** toute l'**activité** de votre profil **Github** dans un seul **feed**, Ce dernier traquera vos *commits*, *Merges*, *issues*, *pull request*... fait sur tout les repository que vous utilisé (Votre ou non). Il permettra également de traqué l'**activité** d'une **liste** de **repository publics** dont vous souhaitez gardé la trace. Une dernière fonctionnalité permettra de **traqué** toute l'**activité publique** d'un ou plusieurs **utilisateur** que vous sélectionnerer.
+**Firstly**,  Application is able to **track** all your **Github profile's** **activity** in one **Feed**. It will track your *commits*, *merges*, *issues*, *pull request*... made on all repository you have or contribute (Private or Public).
+You could also track multiple Public Repository Activity. Or add a list of tracked users, so all their public activity will be added in your feed.
 
-Le feed une fois remplis pourra être **filtré** à votre souhait. En effet vous pourrez choisir de n'afficher que les "commits", les "Code Review", les "issues", les "pull request", Une autre option lui permettra de choisir quel utilisateur (sois même ou un dans la liste des tracks), ainsi qu'un Repository (un créer par nous mêmes, ou un dans la liste des tracks) traqué.
+The feed once filled could be filter based on user Choice. Like showing only commits, or issues, push, starring event. Filters could be combined also. Like showing commits **and** issues. 
 
-Une **Liste noire** permettra de mettre en **"sourdine"** vos **repository** que vous ne voulez plus traqué.
-Par défaut lors de la première connexion sur l'application, les repository "Starred" seront ajouter a la liste des repository traqué. De même pour les utilisateurs que vous suivez.
-
-
-
-## 📱|Application Existante
-Bien entendus GitHub lui même propose déjà quelques choses de similaire sur sa propre Mainpage. Cependant il n'y a quasiment aucun moyen de filtré se feed pour retrouver des informations. De plus il ne ce concentre que sur certains repository, les votres, les starred, les "watched" ou les personnes que vous suivez. Mais peut être que vous ne voulez pas nécessairement être vus par les personnes que vous traqué, dans notre cas cela permet de rester relativement anonyme a ce niveau.
-
-![Image montrant le feed de Github](./MockUp/FeedsImage.png)
-
-L'autre triste nouvelle est que l'application Github officiel ne permet pas de traqué des activités sur un seul feed principal. Il existe une fonctionnalité "Explore" Censé vous présenter de nouveau repository, mais nous sommes loin d'un équivalent a notre application.
+By default, when a user connect for the first time, all Starred repositories will be added to the tracked repositories, and all followed users to the tracked users.
 
 
-## ✨|Fonctionnalitée:
-- *En tant qu'utilisateur* *je veux* pouvoir me connecter en utilisant la connexion GitHub *afin d'utiliser* l'application et si c'est la première fois, importer mes starred repository ainsi que mes abonnements a d'autres utilisateurs.
+## 📱| Existing Applications
+Of courses Github itself already provide this services. But they also add proposal from random repositories, or users. So my App remove this type of problem and focus only on what you want to track.
 
-- *En tant qu'utilisateur* je peux décider de resynchroniser mes track en fonction des starred repo et abonnements dans les paramètres (Suppression des choix customs fait sur l'application). 
+![Picture of discord proposals](./MockUp/FeedsImage.png)
 
-- *En tant qu'utilisateur* je peux ajouté ou supprimer des repository externe dans une liste afin de les traqués dans mon feed ou non.
-- *En tant qu'utilisateur* je peux ajouté ou supprimer d'autres membres de GitHub dans une liste afin de les traqués dans mon feed ou non.
+The other bad news is that the Official Github Application dont provide a list of all activity into a main feed. 
 
-- *En tant qu'utilisateur* je peux sélectionner un ou plusieurs utilisateurs (dont moi même) afin de filtré temporairement mon feed en ne voyant que ceux souhaités.
-- *En tant qu'utilisateur* je peux sélectionner un ou plusieurs Repository (dont les miens) afin de filtré temporairement mon feed en ne voyant que ceux souhaités.
+## ✨|User Stories:
+- *As a user* *I want* to be able to connect using OAuth Github Authentication *to use* GitHubTracker and if it's my first connection, import all my tracks based on my Github Starred Repositories, or followed Users.
+- *As a user* I can choose to reSync my tracks based on my Github Starred Repositories, or followed Users. 
 
-- *En tant qu'utilisateur* je peux sélectionner un ou plusieurs Type de message du feed (pull request, issues,  starred, commits...) afin de filtré temporairement mon feed en ne voyant que ceux souhaités.
+- *As a user* I can add or remove public repositories to the list of tracked repositories.
+- *As a user* I can add or remove github users to the list of tracked users.
+
+- *As a user* I can filter my feed based on the type of event I want see in my feed (pull request, issues,  starred, push...).
 
 ## 💻|Mockup:
 
-![Image montrant les mockups.](./MockUp/MockupAll.png)
+![Mockup pictures](./MockUp/MockupAll.png)
 
 
 ## 🎥 | Demo:
@@ -59,44 +53,42 @@ L'autre triste nouvelle est que l'application Github officiel ne permet pas de t
 ### Auth Token saved in local Storage (SecureStorage)
 ![Install Flutter and Dart SDK](./Gifs/TokenPersistence.gif)
 
-### Gestion des Utilisateurs Tracké
+### Tracked User List Management
 ![Install Flutter and Dart SDK](./Gifs/TrackedUserManagement&Display.gif)
 
-### Filtre et Affichage du Feed
+### Filter and Feed Display
 ![Install Flutter and Dart SDK](./Gifs/Filters&DisplayFeed.gif)
 
-### Redirection Web lorsque c'est pertinent
+### Web redirection when usefull
 ![Install Flutter and Dart SDK](./Gifs/ClickRepo.gif)
 
 
-## ♻️|Etat d'Avancement
+## ♻️| Advancement
 
-✅ Création du ReadMe
+✅ ReadMe Creation
 
-✅ Création de l'arborescence du Repository
+✅ Repository Folder Tree Creation
 
-✅ Conception du Mockup / Maquette
+✅ Mockup Creation
 
-✅ Creation UI Page Login
+✅ Login Page UI Creation
 
-✅ Creation Logique Page Login
+✅ Login Page Logic Creation
 
-✅ Creation Menu Navigation
+✅ Navigation Logic / Routing Creation
 
-✅ Creation des routes Flutters
+✅ Feed Page Creation
 
-✅ Creation de la page Principal (Feed)
+✅ Event Widget UI Creation
 
-✅ Creation des Widgets représentant les différents Messages du Feed
+✅ Event Data Model Creation
 
-✅ Creation des Payloads représetant les informations de types différentes du Feed
+✅ Client Github API Library Creation
 
-✅ Creation de l'API d'utilisation pour GitHub (récupération du feed, et autres appels en tout genre).
+✅ Tracked users list Addition.
 
-✅ Ajout de la liste des personnes a traqué
+✅ Tracked repositories list Addition.
 
-✅ Ajout de la liste des repository a traqué
+✅ Data persistance using FireBase.
 
-✅ Persistance des listes avec FireBase
-
-✅ Creation de la logique de Filtre du Feed
+✅ Feed Filter Addition.
